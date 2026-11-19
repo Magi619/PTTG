@@ -9,7 +9,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/maksoft.css?v=2">
+<link rel="stylesheet" href="assets/maksoft.css?v=3">
+<style id="mk-version-footer-style">
+.mk-version-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:5px auto 17px;padding:0 10px;color:#9aa3b2;font:600 10px/1.35 "DM Sans",Inter,Arial,sans-serif}
+.mk-version-footer-label{margin-right:3px;color:#9aa3b2;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.mk-version-footer a,.mk-version-footer a:visited{display:inline-flex;align-items:center;justify-content:center;min-height:23px;padding:4px 10px;border:1px solid #e5e9ef;border-radius:999px;background:rgba(255,255,255,.88);color:#667085!important;text-decoration:none!important;font:700 10px/1 Inter,Arial,sans-serif;transition:background .16s ease,color .16s ease,border-color .16s ease}
+.mk-version-footer a:hover{background:#f1f4f8;border-color:#cbd5e1;color:#253247!important}
+.mk-version-footer a.is-active{background:#263244;border-color:#263244;color:#fff!important;box-shadow:0 2px 6px rgba(25,35,52,.12)}
+.mk-version-footer a:focus-visible{outline:2px solid #6da4ed;outline-offset:2px}
+@media(max-width:600px){.mk-version-footer{margin-bottom:14px}.mk-version-footer-label{font-size:8px}}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -87,6 +96,8 @@
   </section>
 </main>
 <footer class="site-footer"><a class="brand footer-brand" href="#"><span class="brand-mark">m</span><span>maksoft</span></a><span>Thoughtfully made tools for everyday work.</span><span>© <span id="year"></span> Maksoft · Created by Mahendran</span></footer>
+<nav class="mk-version-footer" aria-label="Choose dashboard version"><span class="mk-version-footer-label">Dashboard</span><a href="legacy.html">Legacy</a><a href="index.html" class="is-active" aria-current="page">Enhanced</a></nav>
+
 <script src="assets/maksoft.js"></script>
 </body>
 </html>
