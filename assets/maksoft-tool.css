@@ -1,122 +1,614 @@
-:root{--mk-ink:#1d1d1f;--mk-muted:#6e6e73;--mk-line:#e5e5e8;--mk-blue:#0071e3;--mk-panel:#fff}html{scroll-behavior:smooth}body{font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;background:#f5f5f7!important;color:var(--mk-ink)!important;-webkit-font-smoothing:antialiased}.mk-header{height:54px;position:sticky;top:0;z-index:99999;background:rgba(255,255,255,.88);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border-bottom:1px solid rgba(0,0,0,.07);margin:-1px 0 22px}.mk-header-inner{max-width:1440px;height:100%;padding:0 25px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.mk-brand{display:flex;align-items:center;gap:9px;text-decoration:none!important;color:#171719!important;font-size:15px;font-weight:800;letter-spacing:-.7px}.mk-brand-mark{width:25px;height:25px;border-radius:8px;background:#171719;color:#fff;display:grid;place-items:center;font-size:17px;font-weight:800;letter-spacing:-2px;padding:0 2px 2px 0}.mk-nav-meta{color:#85858b;font-size:11px;font-weight:600;letter-spacing:.2px}.mk-nav-back{font-size:11px!important;font-weight:700!important;text-decoration:none!important;border:1px solid #e2e2e6!important;background:#fff!important;color:#222!important;border-radius:999px!important;padding:8px 13px!important;box-shadow:none!important;transition:.2s!important}.mk-nav-back:hover{background:#171719!important;border-color:#171719!important;color:#fff!important;transform:translateY(-1px)}body>header:not(.mk-header){position:relative}button,input,select,textarea{font-family:inherit}button{transition:filter .16s,transform .16s}button:hover{filter:brightness(.97)}input,select,textarea{border-radius:9px}table{border-collapse:collapse}::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#c9c9cf;border:2px solid #f5f5f7;border-radius:99px}::-webkit-scrollbar-track{background:transparent}.mh-meta-footer{font-family:inherit!important;color:#85858b!important}.mh-meta-action{color:#0071e3!important}.mh-meta-dialog{border-radius:20px!important;box-shadow:0 28px 90px rgba(0,0,0,.28)!important}.mk-header-spacer{height:1px}@media(max-width:650px){.mk-header{height:50px;margin-bottom:14px}.mk-header-inner{padding:0 14px}.mk-nav-meta{display:none}.mk-nav-back{padding:7px 11px!important;font-size:10px!important}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}/* Maksoft v2 — responsive tool-page system */
-body.mk-tool-body{display:block!important;position:relative!important;width:100%!important;min-width:320px!important;min-height:100vh!important;margin:0!important;padding:0!important;background:#f5f5f7!important;color:#1d1d1f!important;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;line-height:1.5;overflow-x:hidden!important}
-body.mk-tool-body>.mk-header{display:block!important;position:sticky!important;top:0!important;left:auto!important;width:100%!important;height:58px!important;min-height:58px!important;margin:0 0 24px!important;padding:0!important;flex:none!important;transform:none!important;background:rgba(255,255,255,.88)!important;border:0!important;border-bottom:1px solid rgba(0,0,0,.07)!important;box-shadow:0 2px 12px rgba(0,0,0,.025)!important}
-.mk-header-inner{max-width:1480px!important;padding:0 30px!important}
-.mk-brand{font-family:"Manrope","DM Sans",sans-serif!important;font-size:16px!important;letter-spacing:-.8px!important}
-.mk-brand-mark{background:#171719!important;color:#fff!important}
-.mk-nav-meta{font-size:10px!important;letter-spacing:.7px!important;text-transform:uppercase!important}
-.mk-nav-back{display:inline-flex!important;align-items:center!important;gap:7px!important;border:1px solid #e4e4e8!important;border-radius:999px!important;padding:8px 15px!important;background:#fff!important;color:#35353a!important;font-size:11px!important;font-weight:700!important}
-.mk-nav-back:hover{background:#171719!important;color:#fff!important}
-body.mk-tool-body h1,body.mk-tool-body h2,body.mk-tool-body h3,body.mk-tool-body h4{font-family:"Manrope","DM Sans",sans-serif!important;color:#1d1d1f}
-body.mk-tool-body button{font-family:inherit!important;border-radius:10px!important;box-shadow:none!important;cursor:pointer}
-body.mk-tool-body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]),body.mk-tool-body textarea,body.mk-tool-body select{max-width:100%;border:1px solid #dedee4!important;border-radius:10px!important;background:#fff!important;color:#222!important;padding:10px 12px!important;outline:none;box-shadow:0 1px 2px rgba(0,0,0,.025)!important}
-body.mk-tool-body input:focus,body.mk-tool-body textarea:focus,body.mk-tool-body select:focus{border-color:#8abaf0!important;box-shadow:0 0 0 3px rgba(0,113,227,.11)!important}
-body.mk-tool-body table{border-collapse:separate!important;border-spacing:0!important;border-radius:12px!important;overflow:hidden}
-body.mk-tool-body th{background:#f3f4f6!important;color:#555!important;font-weight:700!important}
-body.mk-tool-body td,body.mk-tool-body th{border-color:#e9e9ed!important}
-body.mk-tool-body .mh-meta-footer{max-width:1440px!important;margin:32px auto 0!important;padding:20px 24px 26px!important;border-top:1px solid #e5e5e9!important;color:#77777e!important;text-align:center!important;font-size:11px!important}
-body.mk-tool-body .mh-meta-credit{color:#2b2b30!important}
-body.mk-tool-body .mh-meta-action{color:#0071e3!important}
-body.mk-tool-body .mh-meta-dialog{background:#fff!important;color:#27272b!important;border:1px solid #e8e8ec!important;box-shadow:0 30px 100px rgba(0,0,0,.2)!important}
-body.mk-tool-body .mh-meta-dialog h2{color:#1d1d1f!important}
-body.mk-tool-body .mh-meta-dialog h3{color:#333!important}
-body.mk-tool-body .mh-meta-intro,body.mk-tool-body .mh-meta-section ul{color:#65656c!important}
-body.mk-tool-body .mh-meta-section{background:#f8f8fa!important;border-color:#e6e6eb!important;border-left-color:#0071e3!important}
-body.mk-tool-body .mh-meta-close{background:#f1f1f4!important;color:#222!important;border-color:#ddd!important}
-body.mk-tool-body .html-tools-hub-link{display:none!important}
+/* Maksoft tool theme layer
+   Colour-only overrides. Original tool layout, DOM order, spacing and alignment stay intact. */
 
-/* Frame Studio */
-.mk-frame-page{max-width:1480px;margin:0 auto;padding:10px 30px 50px}
-.mk-tool-heading{margin:0 0 25px;padding:0 2px}
-.mk-tool-eyebrow{font-size:9px;font-weight:800;letter-spacing:1.8px;color:#85858d;margin-bottom:9px}
-.mk-tool-heading h1{font-size:clamp(28px,3vw,38px)!important;line-height:1.12!important;letter-spacing:-1.5px!important;margin:0 0 8px!important}
-.mk-tool-heading p{font-size:13px;color:#76767d;margin:0;max-width:650px}
-.mk-frame-workspace{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
-.mk-frame-preview-panel,.mk-frame-controls{min-width:0;background:#fff;border:1px solid #e6e6ea;border-radius:19px;box-shadow:0 8px 30px rgba(25,25,35,.035)}
-.mk-frame-preview-panel{padding:18px}
-.mk-frame-panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#8a8a92;font-size:9px;font-weight:800;letter-spacing:1.4px}
-.mk-preview-size{border:1px solid #ececf0;border-radius:6px;padding:5px 8px;font-size:9px;letter-spacing:.2px;color:#777780;background:#fafafd}
-.mk-frame-canvas-wrap{width:100%;min-height:300px;display:grid;place-items:center;padding:10px;border-radius:12px;background-color:#f2f3f6;background-image:linear-gradient(45deg,#e8e9ed 25%,transparent 25%),linear-gradient(-45deg,#e8e9ed 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e8e9ed 75%),linear-gradient(-45deg,transparent 75%,#e8e9ed 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}
-.mk-frame-canvas-wrap canvas{display:block!important;width:100%!important;max-width:1120px!important;height:auto!important;aspect-ratio:16/9!important;margin:0 auto!important;border-radius:0!important;box-shadow:0 8px 28px rgba(0,0,0,.1)}
-.mk-frame-controls{padding:21px;display:flex;flex-direction:column;gap:18px}
-.mk-control-heading{padding-bottom:15px;border-bottom:1px solid #ededf0}
-.mk-control-heading>span{font-size:9px;font-weight:800;letter-spacing:1.5px;color:#93939a}
-.mk-control-heading strong{display:block;margin-top:7px;font:800 20px/1.2 "Manrope","DM Sans",sans-serif;letter-spacing:-.7px;color:#202024}
-.mk-control-heading p{margin:6px 0 0;color:#85858d;font-size:11px;line-height:1.5}
-.mk-control-section{display:flex;flex-direction:column;gap:11px}
-.mk-control-label{font-size:9px;font-weight:800;letter-spacing:1.3px;color:#777780}
-.mk-file-label{display:flex;flex-direction:column;gap:3px;padding:14px;border:1px dashed #d6d6dc;border-radius:11px;background:#fafafd;cursor:pointer;color:#333;font-size:11px;font-weight:700}
-.mk-file-label small{font-size:10px;font-weight:400;color:#92929a}
-.mk-file-label input[type=file]{width:100%;max-width:100%;font-size:10px;color:#777}
-.mk-color-label{display:flex;align-items:center;justify-content:space-between;color:#65656c;font-size:11px}
-.mk-color-label input[type=color],.mk-gradient-color input[type=color]{width:42px;height:32px;padding:3px;border:1px solid #dedee5;border-radius:8px;background:white;cursor:pointer}
-.mk-color-palette{display:flex;gap:8px;flex-wrap:wrap}
-.mk-color-palette .color-btn{width:27px!important;height:27px!important;border:0!important;border-radius:9px!important;margin:0!important;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)!important}
-.mk-control-section h4{font-size:12px!important;margin:0!important}
-.mk-gradient-colors{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.mk-gradient-color{display:flex;align-items:center;justify-content:space-between;gap:7px;padding:8px 9px;border:1px solid #ececf0;border-radius:9px;font-size:10px;color:#666}
-.mk-gradient-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.mk-secondary-button{padding:9px 10px!important;background:#f2f2f5!important;border:1px solid #e5e5e9!important;color:#333!important;font-size:10px!important;font-weight:700!important}
-.mk-secondary-button:hover{background:#e9e9ee!important}
-.mk-download-button{width:100%;min-height:43px;margin-top:1px!important;padding:12px 16px!important;background:#171719!important;color:#fff!important;border:0!important;border-radius:999px!important;font-size:11px!important;font-weight:700!important}
-.mk-download-button:hover{background:#34343a!important;transform:translateY(-1px)}
-.mk-frame-controls br{display:none!important}
+/* Shared floating home link — original fixed position and dimensions are retained. */
+body[data-maksoft-tool] .html-tools-hub-link,
+body[data-maksoft-tool] .html-tools-hub-link:visited {
+  background: rgba(255,255,255,.96) !important;
+  color: #263243 !important;
+  border-color: #dce2eb !important;
+  box-shadow: 0 6px 22px rgba(27,39,58,.13) !important;
+}
+body[data-maksoft-tool] .html-tools-hub-link:hover {
+  background: #eaf2fd !important;
+  color: #155fb5 !important;
+  border-color: #b9d1ee !important;
+}
 
-/* Common tool layout families */
-body.mk-page-event .wrap{max-width:1440px!important;margin:0 auto!important;padding:8px 30px 44px!important;grid-template-columns:minmax(280px,420px) minmax(0,1fr)!important;gap:18px!important;min-height:0!important}
-body.mk-page-event .panel{border:1px solid #e7e7eb!important;border-radius:17px!important;box-shadow:0 7px 26px rgba(20,20,30,.035)!important;padding:22px!important}
-body.mk-page-event .top-right{grid-column:1/-1!important}
-body.mk-page-event .top-right h2{font-size:25px!important;letter-spacing:-.8px!important}
-body.mk-page-event .preview-area{background:#f1f2f5!important}
-body.mk-page-akamai .container,body.mk-page-gift .container{max-width:1440px!important;margin:0 auto!important;padding:10px 30px 40px!important}
-body.mk-page-akamai h1,body.mk-page-gift .container>h1{font-size:30px!important;letter-spacing:-1px!important;text-align:left!important;color:#202024!important;margin:0 0 18px!important}
-body.mk-page-akamai .toolbar{padding:15px;background:#fff;border:1px solid #e8e8ec;border-radius:14px;margin-bottom:16px!important}
-body.mk-page-akamai .toolbar button,body.mk-page-gift button,body.mk-page-batch-stock button{background:#171719!important;color:#fff!important;border:1px solid #171719!important;border-radius:999px!important;font-weight:700!important;padding:10px 15px!important;font-size:11px!important}
-body.mk-page-akamai .sheet,body.mk-page-batch-stock table{background:#fff!important;border:1px solid #e6e6ea!important;border-radius:15px!important;overflow:auto!important}
-body.mk-page-akamai th,body.mk-page-batch-stock th{background:#f3f3f6!important;color:#444!important}
-body.mk-page-batch-stock>h1,body.mk-page-batch-stock>div[style*="display:flex"]{max-width:1400px!important;margin-left:auto!important;margin-right:auto!important}
-body.mk-page-batch-stock>h1{font-size:30px!important;letter-spacing:-1px!important;margin-top:5px!important}
-body.mk-page-batch-stock .input-row,body.mk-page-batch-stock .controls,body.mk-page-batch-stock .toggle-container,body.mk-page-batch-stock .vintage-controls,body.mk-page-batch-stock .progress-container,body.mk-page-batch-stock #fetchSummary{max-width:1400px!important;margin-left:auto!important;margin-right:auto!important}
-body.mk-page-batch-stock .input-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,.7fr)!important;gap:16px!important}
-body.mk-page-batch-stock .input-left,body.mk-page-batch-stock .info-box{background:#fff!important;border:1px solid #e7e7eb!important;border-radius:15px!important;padding:18px!important;box-shadow:0 6px 22px rgba(0,0,0,.025)!important}
-body.mk-page-batch-stock #productList{width:100%!important;min-height:150px!important;background:#fafafd!important;color:#222!important;border:1px solid #e3e3e8!important;border-radius:10px!important}
-body.mk-page-batch-stock .controls{display:flex!important;align-items:center;gap:9px;flex-wrap:wrap;margin-top:16px!important;margin-bottom:12px!important}
-body.mk-page-batch-stock .vintage-controls{background:#fff!important;border:1px solid #e8e8ed!important;border-radius:14px!important;padding:16px!important;margin-top:16px!important}
-body.mk-page-batch-stock table{width:100%!important;background:#fff!important;color:#333!important}
-body.mk-page-batch-stock td{color:#444!important}
-body.mk-page-monthly .topbar{max-width:1440px!important;margin:0 auto!important;padding:0 30px!important;background:transparent!important;border-bottom:1px solid #e4e4e8!important}
-body.mk-page-monthly .page{max-width:1440px!important;padding:28px 30px 40px!important}
-body.mk-page-monthly .panel{border:1px solid #e7e7eb!important;border-radius:16px!important;box-shadow:0 6px 24px rgba(0,0,0,.03)!important}
-body.mk-page-monthly .panel-title{font-size:16px!important}
-body.mk-page-monthly .btn-primary{background:#171719!important;color:#fff!important;border-radius:999px!important}
-body.mk-page-monthly .btn-quiet{background:#fff!important;border:1px solid #e1e1e6!important;color:#333!important}
-body.mk-page-order .wrap{max-width:1440px!important;margin:0 auto!important;padding:8px 30px 40px!important}
-body.mk-page-order .card{background:#fff!important;border:1px solid #e7e7eb!important;border-radius:17px!important;box-shadow:0 8px 28px rgba(0,0,0,.035)!important;padding:22px!important}
-body.mk-page-order .title h1{font-size:26px!important;letter-spacing:-.9px!important}
-body.mk-page-order .btn{background:#171719!important;color:#fff!important;border-radius:999px!important}
-body.mk-page-mini .header-bar,body.mk-page-mini .editor-container{max-width:1440px!important;margin-left:auto!important;margin-right:auto!important}
-body.mk-page-mini .header-bar{background:transparent!important;padding:8px 30px 14px!important}
-body.mk-page-mini .editor-container{padding:0 30px 35px!important;gap:14px!important}
-body.mk-page-mini .panel,body.mk-page-mini .preview{border:1px solid #e6e6eb!important;border-radius:15px!important;box-shadow:0 6px 22px rgba(0,0,0,.03)!important}
-body.mk-page-gift .controls{background:#fff!important;border:1px solid #e7e7eb!important;border-radius:17px!important;padding:22px!important;box-shadow:0 7px 28px rgba(0,0,0,.03)!important}
-body.mk-page-landing .inputs,body.mk-page-landing .desktop-view,body.mk-page-landing .code-wrapper{border-radius:16px!important}
-body.mk-page-landing .inputs{background:#fff!important;border:1px solid #e7e7eb!important;box-shadow:0 6px 24px rgba(0,0,0,.03)!important}
-body.mk-page-landing .btn-primary,body.mk-page-landing .btn-secondary{border-radius:999px!important}
-body.mk-page-inzone main{max-width:1160px!important;margin:0 auto!important;padding:12px 25px 40px!important}
-body.mk-page-inzone .hero{border-radius:18px!important;background:#fff!important;border:1px solid #e7e7eb!important;padding:22px!important}
-body.mk-page-inzone .panel{border:1px solid #e7e7eb!important;border-radius:16px!important;background:#fff!important;box-shadow:0 6px 24px rgba(0,0,0,.03)!important}
-body.mk-page-image-editor>.mk-header{position:fixed!important;top:0!important;left:0!important;right:0!important}
-body.mk-page-image-editor .screen.active{padding-top:58px!important;box-sizing:border-box!important}
-body.mk-page-image-editor .editor-top{top:58px!important}
-@media(max-width:980px){.mk-frame-workspace{grid-template-columns:minmax(0,1fr) 290px!important}body.mk-page-event .wrap{grid-template-columns:1fr!important}.mk-frame-canvas-wrap{min-height:220px!important}}
-@media(max-width:700px){body.mk-tool-body>.mk-header{height:52px!important;min-height:52px!important;margin-bottom:16px!important}.mk-header-inner{padding:0 15px!important}.mk-nav-meta{display:none!important}.mk-frame-page{padding:5px 14px 30px!important}.mk-frame-workspace{grid-template-columns:1fr!important;gap:13px!important}.mk-frame-preview-panel{padding:10px!important}.mk-frame-canvas-wrap{min-height:160px!important;padding:6px!important}.mk-frame-controls{padding:17px!important}.mk-tool-heading{margin-bottom:16px!important}.mk-tool-heading h1{font-size:28px!important}body.mk-page-event .wrap,body.mk-page-akamai .container,body.mk-page-gift .container,body.mk-page-order .wrap{padding:5px 14px 30px!important}body.mk-page-batch-stock .input-row{grid-template-columns:1fr!important}body.mk-page-monthly .page{padding:18px 14px 30px!important}body.mk-page-monthly .topbar{padding:0 14px!important}body.mk-page-mini .editor-container{padding:0 14px 30px!important;grid-template-columns:1fr!important}body.mk-page-inzone main{padding:5px 14px 30px!important}}
-/* Frame Studio overflow guard — keep the preview and controls in the same viewport */
-.mk-tool-page.mk-frame-page,.mk-tool-page.mk-frame-page *{box-sizing:border-box!important}
-.mk-tool-page.mk-frame-page{width:100%!important;max-width:1480px!important;min-width:0!important;margin-left:auto!important;margin-right:auto!important}
-.mk-tool-page.mk-frame-page .mk-frame-workspace{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(270px,300px)!important;column-gap:18px!important;align-items:start!important;width:100%!important;max-width:100%!important;min-width:0!important}
-.mk-tool-page.mk-frame-page .mk-frame-preview-panel,.mk-tool-page.mk-frame-page .mk-frame-controls{width:100%!important;max-width:100%!important;min-width:0!important}
-.mk-tool-page.mk-frame-page .mk-frame-canvas-wrap{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
-.mk-tool-page.mk-frame-page .mk-frame-canvas-wrap canvas{display:block!important;flex:0 1 auto!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;aspect-ratio:16/9!important;object-fit:contain!important}
-.mk-tool-page.mk-frame-page .mk-frame-controls{position:sticky!important;top:78px!important;align-self:start!important;overflow:visible!important}
-@media(max-width:1050px){.mk-tool-page.mk-frame-page .mk-frame-workspace{grid-template-columns:minmax(0,1fr)!important}.mk-tool-page.mk-frame-page .mk-frame-controls{position:static!important}}
-@media(max-width:700px){.mk-tool-page.mk-frame-page{padding-left:14px!important;padding-right:14px!important}.mk-tool-page.mk-frame-page .mk-frame-workspace{grid-template-columns:minmax(0,1fr)!important}}
+/* Shared information and patch-note panels. */
+body[data-maksoft-tool] .mh-meta-footer {
+  color: #697586 !important;
+  border-top-color: #dfe4eb !important;
+}
+body[data-maksoft-tool] .mh-meta-credit { color: #293445 !important; }
+body[data-maksoft-tool] .mh-meta-action { color: #1769bd !important; }
+body[data-maksoft-tool] .mh-meta-dialog {
+  background: #ffffff !important;
+  color: #263243 !important;
+  border-color: #dce2eb !important;
+  box-shadow: 0 24px 70px rgba(24,36,54,.22) !important;
+}
+body[data-maksoft-tool] .mh-meta-dialog h2 { color: #202c3b !important; }
+body[data-maksoft-tool] .mh-meta-dialog h3 { color: #344257 !important; }
+body[data-maksoft-tool] .mh-meta-intro,
+body[data-maksoft-tool] .mh-meta-section ul { color: #5c6879 !important; }
+body[data-maksoft-tool] .mh-meta-close {
+  background: #f0f3f7 !important;
+  color: #263243 !important;
+  border-color: #d8dfe8 !important;
+}
+body[data-maksoft-tool] .mh-meta-section {
+  background: #f7f9fc !important;
+  border-color: #e2e7ee !important;
+  border-left-color: #367fc3 !important;
+}
+
+/* AKAMAI — quiet navy surfaces with clear cyan actions. */
+body[data-maksoft-tool="akamai"] {
+  color-scheme: dark;
+  background-color: #111a28 !important;
+  color: #e8eef6 !important;
+}
+body[data-maksoft-tool="akamai"] .container { color: #e8eef6 !important; }
+body[data-maksoft-tool="akamai"] .toolbar {
+  background-color: #1a2636 !important;
+  border-color: #34465b !important;
+}
+body[data-maksoft-tool="akamai"] .sheet {
+  background-color: #172333 !important;
+  border-color: #34465b !important;
+}
+body[data-maksoft-tool="akamai"] th {
+  background-color: #26384d !important;
+  color: #e8eef6 !important;
+  border-color: #3a4b60 !important;
+}
+body[data-maksoft-tool="akamai"] td {
+  background-color: #1b293b !important;
+  color: #e0e8f2 !important;
+  border-color: #35475c !important;
+}
+body[data-maksoft-tool="akamai"] .input-cell input,
+body[data-maksoft-tool="akamai"] input {
+  background-color: #111c2b !important;
+  color: #f0f4f9 !important;
+  border-color: #40536a !important;
+}
+body[data-maksoft-tool="akamai"] button {
+  background-color: #4bb9d8 !important;
+  color: #10212a !important;
+  border-color: #4bb9d8 !important;
+}
+body[data-maksoft-tool="akamai"] button:hover {
+  background-color: #69cbe5 !important;
+  border-color: #69cbe5 !important;
+}
+body[data-maksoft-tool="akamai"] .app-footer,
+body[data-maksoft-tool="akamai"] .footer-meta { color: #aab8c8 !important; }
+body[data-maksoft-tool="akamai"] .patch-notes-trigger { color: #65c8e2 !important; }
+body[data-maksoft-tool="akamai"] .modal-backdrop { background: rgba(5,10,18,.82) !important; }
+body[data-maksoft-tool="akamai"] .patch-modal {
+  background: #1b293b !important;
+  color: #e8eef6 !important;
+  border-color: #3a4c62 !important;
+}
+body[data-maksoft-tool="akamai"] .patch-modal h2 { color: #6bcce6 !important; }
+body[data-maksoft-tool="akamai"] .patch-modal p { color: #c2cedb !important; }
+
+/* EVENT TICKET BUILDER — soft neutral panels; retain its warm ticket preview. */
+body[data-maksoft-tool="event"] {
+  --bg: #f4f6f9;
+  --card-bg: #ffffff;
+  --accent: #176fc1;
+  background-color: #f4f6f9 !important;
+  color: #202b3a !important;
+}
+body[data-maksoft-tool="event"] .panel {
+  background-color: #ffffff !important;
+  border-color: #e0e6ee !important;
+  box-shadow: 0 6px 18px rgba(29,45,66,.055) !important;
+}
+body[data-maksoft-tool="event"] label { color: #3d4a5b !important; }
+body[data-maksoft-tool="event"] input,
+body[data-maksoft-tool="event"] select {
+  background-color: #ffffff !important;
+  color: #263445 !important;
+  border-color: #d9e0e9 !important;
+}
+body[data-maksoft-tool="event"] button {
+  background-color: #176fc1 !important;
+  color: #ffffff !important;
+}
+body[data-maksoft-tool="event"] button.secondary {
+  background-color: #e9edf3 !important;
+  color: #354255 !important;
+}
+body[data-maksoft-tool="event"] .card.filtered-div {
+  background-color: #ffffff !important;
+  border-color: #e1e6ed !important;
+}
+body[data-maksoft-tool="event"] .card-content {
+  background-color: #fff8f2 !important;
+  color: #303744 !important;
+}
+body[data-maksoft-tool="event"] .card-time { color: #bd4654 !important; }
+body[data-maksoft-tool="event"] .card-location { color: #566171 !important; }
+body[data-maksoft-tool="event"] pre {
+  background-color: #182332 !important;
+  color: #e6edf5 !important;
+}
+
+/* GIFT PDP — restrained light workspace; retain semantic button colours. */
+body[data-maksoft-tool="gift"] {
+  --bg: #f1f3f6;
+  --panel: #f8f9fb;
+  --card: #ffffff;
+  --border: #cbd3de;
+  --border-dark: #aeb9c8;
+  --text: #202a37;
+  --muted: #5f6b7b;
+  --primary: #3977b6;
+  --primary-dark: #2d639b;
+  --success: #2f8050;
+  --success-dark: #23623d;
+  --purple: #7752a4;
+  --purple-dark: #5c3d83;
+  --danger: #c44e57;
+  --danger-dark: #9f3540;
+  background-color: #f1f3f6 !important;
+  color: #202a37 !important;
+}
+body[data-maksoft-tool="gift"] .section-header {
+  background-image: linear-gradient(#f7f9fb, #e9edf2) !important;
+  border-bottom-color: #cbd3de !important;
+}
+body[data-maksoft-tool="gift"] .section-title,
+body[data-maksoft-tool="gift"] .input-label { color: #2e3a4a !important; }
+body[data-maksoft-tool="gift"] .section-subtitle,
+body[data-maksoft-tool="gift"] .subtitle { color: #667386 !important; }
+body[data-maksoft-tool="gift"] #codeInput,
+body[data-maksoft-tool="gift"] #contentsInput,
+body[data-maksoft-tool="gift"] #deliveryInput,
+body[data-maksoft-tool="gift"] #allergenInput,
+body[data-maksoft-tool="gift"] .saved-search {
+  background-color: #ffffff !important;
+  color: #202a37 !important;
+  border-color: #cbd3de !important;
+}
+body[data-maksoft-tool="gift"] .generate { background-image: linear-gradient(#4b87c0,#326fa8) !important; color: #fff !important; }
+body[data-maksoft-tool="gift"] .refresh { background-image: linear-gradient(#f7f9fb,#e8edf3) !important; color: #354255 !important; }
+body[data-maksoft-tool="gift"] .save { background-image: linear-gradient(#438b5d,#2e7046) !important; color: #fff !important; }
+body[data-maksoft-tool="gift"] .delete { background-image: linear-gradient(#c85b62,#a83d47) !important; color: #fff !important; }
+body[data-maksoft-tool="gift"] .sop { background-color: #ffffff !important; border-color: #cbd3de !important; }
+body[data-maksoft-tool="gift"] .saved-section { background-color: #f8fafc !important; border-color: #d8dfe8 !important; }
+
+/* MINI HTML — a balanced light theme and a softer, readable night theme. */
+body[data-maksoft-tool="mini"] {
+  --accent: #176fc8;
+  --accent-dark: #125ca8;
+  --bg: #f3f6fa;
+  --card: #ffffff;
+  --muted: #687586;
+  --text: #202b3a;
+  background-color: #f3f6fa !important;
+  color: #202b3a !important;
+}
+body[data-maksoft-tool="mini"].dark-mode {
+  --accent: #82b8ff;
+  --accent-dark: #609de9;
+  --bg: #151d29;
+  --card: #202b39;
+  --muted: #aab6c5;
+  --text: #e9eef5;
+  color-scheme: dark;
+  background-color: #151d29 !important;
+  color: #e9eef5 !important;
+}
+body[data-maksoft-tool="mini"] .editor-container,
+body[data-maksoft-tool="mini"] .panel,
+body[data-maksoft-tool="mini"] .toolbar { background-color: var(--card) !important; }
+body[data-maksoft-tool="mini"] textarea {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  border-color: #d5dde7 !important;
+}
+body[data-maksoft-tool="mini"].dark-mode textarea {
+  border-color: #3a485b !important;
+}
+body[data-maksoft-tool="mini"] .preview {
+  background-color: #ffffff !important;
+  color: #273244 !important;
+  border-color: #dfe5ed !important;
+}
+body[data-maksoft-tool="mini"].dark-mode .preview {
+  background-color: #151d29 !important;
+  color: #e9eef5 !important;
+  border-color: #3a485b !important;
+}
+body[data-maksoft-tool="mini"] .header-bar h1,
+body[data-maksoft-tool="mini"] .panel-header h3 { color: var(--accent) !important; }
+body[data-maksoft-tool="mini"] .toggle-btn { color: var(--muted) !important; border-color: #cbd5e1 !important; }
+body[data-maksoft-tool="mini"].dark-mode .toggle-btn { border-color: #45536a !important; }
+body[data-maksoft-tool="mini"] .stats { color: var(--muted) !important; }
+
+/* ORDER CODE EXTRACTOR — deep forest-slate instead of fluorescent black/green. */
+body[data-maksoft-tool="pageturner"] {
+  --bg: #101a20;
+  --panel: #1a2930;
+  --text: #e1eee9;
+  --accent: #63d6a4;
+  --accent-dim: #369b75;
+  --ok: #67d9a6;
+  --warn: #f0c879;
+  --err: #f18491;
+  --line: #334b4d;
+  --shadow: 0 0 18px rgba(69,180,137,.09), inset 0 0 10px rgba(69,180,137,.025);
+  color-scheme: dark;
+  background-color: #101a20 !important;
+  color: #e1eee9 !important;
+  background-image: radial-gradient(1200px 800px at 20% -10%, #1a3430 0%, #101a20 40%) !important;
+}
+body[data-maksoft-tool="pageturner"] .card {
+  background-image: linear-gradient(180deg, rgba(99,214,164,.055), rgba(99,214,164,.018)) !important;
+  background-color: #1a2930 !important;
+  border-color: #334b4d !important;
+  box-shadow: 0 0 18px rgba(69,180,137,.09) !important;
+}
+body[data-maksoft-tool="pageturner"] #output {
+  background-color: #0d171d !important;
+  color: #e0eee8 !important;
+  border-color: #334b4d !important;
+}
+body[data-maksoft-tool="pageturner"] .btn {
+  background-color: #63d6a4 !important;
+  color: #10251f !important;
+  box-shadow: 0 5px 16px rgba(69,180,137,.12) !important;
+}
+body[data-maksoft-tool="pageturner"] .btn-ghost {
+  background-color: transparent !important;
+  color: #82e1b8 !important;
+  border-color: #4a9f7d !important;
+}
+body[data-maksoft-tool="pageturner"] .file-input,
+body[data-maksoft-tool="pageturner"] .check {
+  background-color: #1a2930 !important;
+  border-color: #3a5556 !important;
+}
+body[data-maksoft-tool="pageturner"] .file-tag {
+  background-color: #203a35 !important;
+  color: #91e5bf !important;
+  border-color: #4a9f7d !important;
+}
+body[data-maksoft-tool="pageturner"] .meta,
+body[data-maksoft-tool="pageturner"] .foot { color: #a6c7bb !important; }
+body[data-maksoft-tool="pageturner"] .code { color: #e7f5ef !important; }
+body[data-maksoft-tool="pageturner"] #progressBar { background-color: #243a3b !important; border-color: #3c5655 !important; }
+body[data-maksoft-tool="pageturner"] #progressInner { background-image: linear-gradient(90deg,#63d6a4,#48b98f) !important; }
+
+/* FRAME TOOL — charcoal with calm cyan accents; original flex layout is untouched. */
+body[data-maksoft-tool="frame"] {
+  color-scheme: dark;
+  background-color: #171e28 !important;
+  color: #e9eff6 !important;
+}
+body[data-maksoft-tool="frame"] .controls { color: #e9eff6 !important; }
+body[data-maksoft-tool="frame"] button.download {
+  background-color: #36bfd5 !important;
+  color: #09252b !important;
+}
+body[data-maksoft-tool="frame"] .html-tools-hub-link {
+  background: rgba(32,43,57,.96) !important;
+  color: #eef4fa !important;
+  border-color: #465568 !important;
+}
+
+/* LANDING PAGE HTML BUILDER — independent light/night palettes, same split layout. */
+body[data-maksoft-tool="landing"].light {
+  --panel-bg: #ffffff;
+  --muted-border: #dce3ec;
+  background-color: #f3f5f8 !important;
+  color: #273244 !important;
+}
+body[data-maksoft-tool="landing"].dark {
+  --panel-bg: #202b38;
+  --muted-border: #3b4b5f;
+  color-scheme: dark;
+  background-color: #151e29 !important;
+  color: #e8eef5 !important;
+}
+body[data-maksoft-tool="landing"].dark .inputs,
+body[data-maksoft-tool="landing"].dark #outputBox,
+body[data-maksoft-tool="landing"].dark details {
+  background-color: #202b38 !important;
+  color: #e8eef5 !important;
+  border-color: #3b4b5f !important;
+}
+body[data-maksoft-tool="landing"].dark input,
+body[data-maksoft-tool="landing"].dark textarea {
+  background-color: #151e29 !important;
+  color: #e8eef5 !important;
+  border-color: #46566a !important;
+}
+body[data-maksoft-tool="landing"].dark pre code#generated {
+  background-color: #111923 !important;
+  color: #e6edf5 !important;
+}
+body[data-maksoft-tool="landing"].dark button.icon-btn:hover {
+  background-color: #2a394a !important;
+}
+body[data-maksoft-tool="landing"].light .inputs,
+body[data-maksoft-tool="landing"].light #outputBox {
+  background-color: #ffffff !important;
+  color: #273244 !important;
+  border-color: #dce3ec !important;
+}
+
+/* BATCH STOCK LOOKUP — improve both the default dark palette and its light toggle. */
+body[data-maksoft-tool="stock"] {
+  --bg: #161d28;
+  --panel: #222c3a;
+  --text: #eaf0f6;
+  --muted: #aab5c3;
+  --accent: #d94375;
+  --accent-hover: #ef6390;
+  --table-bg: #202b39;
+  --border: #3c4b60;
+  color-scheme: dark;
+  background-color: #161d28 !important;
+  color: #eaf0f6 !important;
+}
+body[data-maksoft-tool="stock"].light-mode {
+  --bg: #f3f5f8;
+  --panel: #ffffff;
+  --text: #263244;
+  --muted: #687587;
+  --accent: #c93669;
+  --accent-hover: #ad2858;
+  --table-bg: #ffffff;
+  --border: #d9e0e9;
+  color-scheme: light;
+  background-color: #f3f5f8 !important;
+  color: #263244 !important;
+}
+body[data-maksoft-tool="stock"] .info-box,
+body[data-maksoft-tool="stock"] .input-left {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+body[data-maksoft-tool="stock"] textarea,
+body[data-maksoft-tool="stock"] #stockThresholdInput,
+body[data-maksoft-tool="stock"] #manualVintageInput {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+body[data-maksoft-tool="stock"] table,
+body[data-maksoft-tool="stock"] td {
+  background-color: var(--table-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+body[data-maksoft-tool="stock"] th {
+  background-color: #303d50 !important;
+  color: #f1f5f9 !important;
+  border-color: var(--border) !important;
+}
+body[data-maksoft-tool="stock"].light-mode th {
+  background-color: #e8edf4 !important;
+  color: #354257 !important;
+}
+body[data-maksoft-tool="stock"] button {
+  background-color: var(--accent) !important;
+  color: #ffffff !important;
+  border-color: var(--accent) !important;
+}
+body[data-maksoft-tool="stock"] button:hover {
+  background-color: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+}
+body[data-maksoft-tool="stock"].light-mode .html-tools-hub-link {
+  background: rgba(255,255,255,.96) !important;
+  color: #263243 !important;
+  border-color: #dce2eb !important;
+}
+
+/* PHOTO TOOLKIT — graphite surfaces with a softer amber creative accent. */
+body[data-maksoft-tool="photoshop"] {
+  --bg: #171d26;
+  --panel: #202a36;
+  --panel-2: #273342;
+  --line: #3b495a;
+  --text: #edf1f6;
+  --muted: #a5afbd;
+  --amber: #efb45f;
+  --amber-dim: #bd8d4e;
+  --red: #dc7777;
+  color-scheme: dark;
+  background-color: #171d26 !important;
+  color: #edf1f6 !important;
+}
+
+/* INZONE BUDS — softer violet night palette with reduced neon glare. */
+body[data-maksoft-tool="inzone"] {
+  --bg: #100e19;
+  --panel: #1c1928;
+  --panel2: #151321;
+  --line: #39314b;
+  --text: #f1edf9;
+  --muted: #b7adc9;
+  --dim: #9184a8;
+  --violet: #9a72ee;
+  --purple: #7045c7;
+  --pink: #c779d9;
+  color-scheme: dark;
+  background-color: #100e19 !important;
+  color: #f1edf9 !important;
+  background-image:
+    radial-gradient(ellipse at 50% -10%,rgba(130,92,205,.19),transparent 36rem),
+    radial-gradient(ellipse at 100% 70%,rgba(108,71,159,.10),transparent 28rem) !important;
+}
+body[data-maksoft-tool="inzone"] .panel {
+  background-image: linear-gradient(145deg,rgba(38,32,53,.98),rgba(24,21,35,.98)) !important;
+  background-color: #1c1928 !important;
+  border-color: #39314b !important;
+}
+body[data-maksoft-tool="inzone"] button {
+  background-image: linear-gradient(110deg,#7048c3,#8d61d6) !important;
+  background-color: #8055ce !important;
+  border-color: #936fde !important;
+  color: #ffffff !important;
+}
+body[data-maksoft-tool="inzone"] button.secondary {
+  background-image: none !important;
+  background-color: #2a2438 !important;
+  border-color: #514365 !important;
+  color: #eee8fa !important;
+}
+
+/* MONTHLY AHD — clear Office-like blue, neutral surfaces and readable tables. */
+body[data-maksoft-tool="monthly"] {
+  --brand: #2876bc;
+  --brand-hover: #1f639f;
+  --brand-light: #eaf3fb;
+  --ink: #202b39;
+  --muted: #657386;
+  --line: #d8e0e9;
+  --surface: #ffffff;
+  --canvas: #f3f5f8;
+  --success: #23845b;
+  --danger: #c84e58;
+  background-color: #f3f5f8 !important;
+  color: #202b39 !important;
+}
+body[data-maksoft-tool="monthly"] .panel,
+body[data-maksoft-tool="monthly"] .stat-card {
+  background-color: #ffffff !important;
+  border-color: #dfe5ed !important;
+}
+body[data-maksoft-tool="monthly"] .panel-head {
+  border-bottom-color: #e7ebf1 !important;
+}
+body[data-maksoft-tool="monthly"] .select,
+body[data-maksoft-tool="monthly"] .search-input,
+body[data-maksoft-tool="monthly"] .file-button {
+  background-color: #ffffff !important;
+  color: #263346 !important;
+  border-color: #cbd5e1 !important;
+}
+body[data-maksoft-tool="monthly"] .btn-primary {
+  background-color: #2876bc !important;
+  color: #ffffff !important;
+}
+body[data-maksoft-tool="monthly"] .btn-quiet {
+  background-color: #f0f3f7 !important;
+  color: #344256 !important;
+  border-color: #d8e0e9 !important;
+}
+body[data-maksoft-tool="monthly"] thead th {
+  background-color: #edf2f8 !important;
+  color: #344256 !important;
+  border-color: #dfe5ed !important;
+}
+body[data-maksoft-tool="monthly"] tbody td,
+body[data-maksoft-tool="monthly"] tfoot td {
+  border-color: #e6ebf1 !important;
+}
+body[data-maksoft-tool="monthly"] tbody tr:nth-child(even) { background-color: #f7f9fc !important; }
+body[data-maksoft-tool="monthly"] tbody tr:hover { background-color: #edf5fd !important; }
+
+/* Dark-theme modals use a controlled slate palette, not the legacy blue-black modal. */
+body[data-maksoft-tool="akamai"] .mh-meta-dialog,
+body[data-maksoft-tool="pageturner"] .mh-meta-dialog,
+body[data-maksoft-tool="frame"] .mh-meta-dialog,
+body[data-maksoft-tool="photoshop"] .mh-meta-dialog,
+body[data-maksoft-tool="inzone"] .mh-meta-dialog,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-dialog,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-dialog,
+body[data-maksoft-tool="landing"].dark .mh-meta-dialog {
+  background: #202a37 !important;
+  color: #eaf0f6 !important;
+  border-color: #3b4a5d !important;
+}
+body[data-maksoft-tool="akamai"] .mh-meta-dialog h2,
+body[data-maksoft-tool="pageturner"] .mh-meta-dialog h2,
+body[data-maksoft-tool="frame"] .mh-meta-dialog h2,
+body[data-maksoft-tool="photoshop"] .mh-meta-dialog h2,
+body[data-maksoft-tool="inzone"] .mh-meta-dialog h2,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-dialog h2,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-dialog h2,
+body[data-maksoft-tool="landing"].dark .mh-meta-dialog h2 { color: #f0f4f9 !important; }
+body[data-maksoft-tool="akamai"] .mh-meta-dialog h3,
+body[data-maksoft-tool="pageturner"] .mh-meta-dialog h3,
+body[data-maksoft-tool="frame"] .mh-meta-dialog h3,
+body[data-maksoft-tool="photoshop"] .mh-meta-dialog h3,
+body[data-maksoft-tool="inzone"] .mh-meta-dialog h3,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-dialog h3,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-dialog h3,
+body[data-maksoft-tool="landing"].dark .mh-meta-dialog h3 { color: #dce5ef !important; }
+body[data-maksoft-tool="akamai"] .mh-meta-intro,
+body[data-maksoft-tool="pageturner"] .mh-meta-intro,
+body[data-maksoft-tool="frame"] .mh-meta-intro,
+body[data-maksoft-tool="photoshop"] .mh-meta-intro,
+body[data-maksoft-tool="inzone"] .mh-meta-intro,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-intro,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-intro,
+body[data-maksoft-tool="landing"].dark .mh-meta-intro,
+body[data-maksoft-tool="akamai"] .mh-meta-section ul,
+body[data-maksoft-tool="pageturner"] .mh-meta-section ul,
+body[data-maksoft-tool="frame"] .mh-meta-section ul,
+body[data-maksoft-tool="photoshop"] .mh-meta-section ul,
+body[data-maksoft-tool="inzone"] .mh-meta-section ul,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-section ul,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-section ul,
+body[data-maksoft-tool="landing"].dark .mh-meta-section ul { color: #b9c6d5 !important; }
+body[data-maksoft-tool="akamai"] .mh-meta-section,
+body[data-maksoft-tool="pageturner"] .mh-meta-section,
+body[data-maksoft-tool="frame"] .mh-meta-section,
+body[data-maksoft-tool="photoshop"] .mh-meta-section,
+body[data-maksoft-tool="inzone"] .mh-meta-section,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-section,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-section,
+body[data-maksoft-tool="landing"].dark .mh-meta-section {
+  background: #182231 !important;
+  border-color: #3b4a5d !important;
+  border-left-color: #77aef0 !important;
+}
+body[data-maksoft-tool="akamai"] .mh-meta-close,
+body[data-maksoft-tool="pageturner"] .mh-meta-close,
+body[data-maksoft-tool="frame"] .mh-meta-close,
+body[data-maksoft-tool="photoshop"] .mh-meta-close,
+body[data-maksoft-tool="inzone"] .mh-meta-close,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-close,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-close,
+body[data-maksoft-tool="landing"].dark .mh-meta-close {
+  background: #2b3747 !important;
+  color: #edf2f7 !important;
+  border-color: #4a596d !important;
+}
+
+/* Dark-mode floating navigation chip. */
+body[data-maksoft-tool="akamai"] .html-tools-hub-link,
+body[data-maksoft-tool="pageturner"] .html-tools-hub-link,
+body[data-maksoft-tool="frame"] .html-tools-hub-link,
+body[data-maksoft-tool="photoshop"] .html-tools-hub-link,
+body[data-maksoft-tool="inzone"] .html-tools-hub-link,
+body[data-maksoft-tool="stock"]:not(.light-mode) .html-tools-hub-link,
+body[data-maksoft-tool="mini"].dark-mode .html-tools-hub-link,
+body[data-maksoft-tool="landing"].dark .html-tools-hub-link {
+  background: rgba(32,42,55,.96) !important;
+  color: #eef3f8 !important;
+  border-color: #46566a !important;
+}
+body[data-maksoft-tool="akamai"] .html-tools-hub-link:hover,
+body[data-maksoft-tool="pageturner"] .html-tools-hub-link:hover,
+body[data-maksoft-tool="frame"] .html-tools-hub-link:hover,
+body[data-maksoft-tool="photoshop"] .html-tools-hub-link:hover,
+body[data-maksoft-tool="inzone"] .html-tools-hub-link:hover,
+body[data-maksoft-tool="stock"]:not(.light-mode) .html-tools-hub-link:hover,
+body[data-maksoft-tool="mini"].dark-mode .html-tools-hub-link:hover,
+body[data-maksoft-tool="landing"].dark .html-tools-hub-link:hover {
+  background: #33445a !important;
+  color: #ffffff !important;
+  border-color: #5c7695 !important;
+}
