@@ -6,7 +6,7 @@ Maksoft is a unified home for practical browser-based tools for business operati
 
 ## Live preview
 
-After enabling GitHub Pages for the `main` branch with the repository root as the publishing folder, the site will be available at:
+One-time setup: open **Settings → Pages** and set **Build and deployment → Source** to **GitHub Actions**. The workflow in `.github/workflows/deploy-pages.yml` will publish every new commit to `main`. The site will then be available at:
 
 https://magi619.github.io/PTTG/
 
