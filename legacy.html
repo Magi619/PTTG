@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maksoft — Legacy Dashboard</title>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f5f7fb;
+            --surface: #ffffff;
+            --surface-hover: #f8fafc;
+            --border: #e5e7eb;
+            --text: #111827;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.07);
+            --shadow-hover: 0 14px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        body.dark {
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface-hover: #172033;
+            --border: #263244;
+            --text: #f9fafb;
+            --muted: #9ca3af;
+            --primary: #60a5fa;
+            --primary-hover: #93c5fd;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: color-mix(
+                in srgb,
+                var(--surface) 92%,
+                transparent
+            );
+
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: auto;
+            padding: 18px 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--primary);
+            color: white;
+
+            border-radius: 13px;
+            font-size: 22px;
+
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+        }
+
+        .brand-text h1 {
+            font-size: 19px;
+            line-height: 1.2;
+        }
+
+        .brand-text p {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon-button {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            font-size: 18px;
+
+            transition: 0.2s ease;
+        }
+
+        .icon-button:hover {
+            background: var(--surface-hover);
+            transform: translateY(-1px);
+        }
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        .container {
+            width: min(1400px, calc(100% - 40px));
+            margin: auto;
+            padding: 42px 0 60px;
+        }
+
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .hero h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-container {
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        #searchInput {
+            width: 100%;
+
+            padding: 16px 50px 16px 50px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            outline: none;
+
+            box-shadow: var(--shadow);
+
+            transition: 0.2s ease;
+        }
+
+        #searchInput:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.1),
+                var(--shadow);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 32px;
+            height: 32px;
+
+            border: 0;
+            border-radius: 9px;
+
+            background: transparent;
+            color: var(--muted);
+
+            display: none;
+        }
+
+        .clear-search:hover {
+            background: var(--surface-hover);
+        }
+
+        /* =========================================================
+           CATEGORIES
+        ========================================================= */
+
+        .categories {
+            display: flex;
+            gap: 9px;
+
+            margin: 24px 0 38px;
+
+            overflow-x: auto;
+            padding-bottom: 5px;
+
+            scrollbar-width: thin;
+        }
+
+        .category-button {
+            flex-shrink: 0;
+
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--muted);
+
+            padding: 9px 15px;
+            border-radius: 999px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.2s ease;
+        }
+
+        .category-button:hover {
+            color: var(--text);
+            background: var(--surface-hover);
+        }
+
+        .category-button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
+
+        .section {
+            margin-bottom: 42px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 750;
+        }
+
+        .section-count {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           RECENT
+        ========================================================= */
+
+        .recent-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 9px 13px;
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            background: var(--surface);
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .recent-item:hover {
+            background: var(--surface-hover);
+            transform: translateY(-1px);
+        }
+
+        .recent-time {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           TOOL GRID
+        ========================================================= */
+
+        .tool-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill, minmax(275px, 1fr));
+
+            gap: 18px;
+        }
+
+        /* =========================================================
+           TOOL CARD
+        ========================================================= */
+
+        .tool-card {
+            position: relative;
+
+            background: var(--surface);
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 21px;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+
+            animation: cardIn 0.25s ease both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: color-mix(
+                in srgb,
+                var(--primary) 35%,
+                var(--border)
+            );
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .tool-icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--surface-hover);
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            font-size: 25px;
+        }
+
+        .favorite-button {
+            width: 35px;
+            height: 35px;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: transparent;
+            color: var(--muted);
+
+            font-size: 20px;
+
+            transition: 0.2s ease;
+        }
+
+        .favorite-button:hover {
+            background: var(--surface-hover);
+            color: #f59e0b;
+        }
+
+        .favorite-button.active {
+            color: #f59e0b;
+        }
+
+        .tool-name {
+            margin-top: 17px;
+
+            font-size: 17px;
+            font-weight: 750;
+        }
+
+        .tool-description {
+            margin-top: 7px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.55;
+
+            min-height: 41px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .tag.utility {
+            background: rgba(16, 185, 129, 0.12);
+            color: #10b981;
+        }
+
+        .tag.new {
+            background: rgba(59, 130, 246, 0.12);
+            color: #3b82f6;
+        }
+
+        .tag.beta {
+            background: rgba(168, 85, 247, 0.12);
+            color: #a855f7;
+        }
+
+        .tag.testing {
+            background: rgba(245, 158, 11, 0.12);
+            color: #f59e0b;
+        }
+
+        .category-label {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .open-button {
+            width: 100%;
+
+            margin-top: 18px;
+            padding: 11px 14px;
+
+            border: 0;
+            border-radius: 11px;
+
+            background: var(--primary);
+            color: white;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .open-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .open-button:disabled { opacity: .58; cursor: not-allowed; transform: none; }
+        .open-button:disabled:hover { background: var(--primary); transform: none; }
+
+        /* =========================================================
+           EMPTY STATE
+        ========================================================= */
+
+        .empty-state {
+            display: none;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background: var(--surface);
+            border: 1px dashed var(--border);
+
+            border-radius: 18px;
+        }
+
+        .empty-state-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 6px;
+        }
+
+        .empty-state p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+
+            padding: 10px 0 30px;
+        }
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .header-inner {
+                padding: 14px 17px;
+            }
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-text h1 {
+                font-size: 16px;
+            }
+
+            .brand-text p {
+                font-size: 11px;
+            }
+
+            .container {
+                width: min(100% - 28px, 1400px);
+                padding-top: 30px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                margin-bottom: 28px;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .header-actions .icon-button {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-text p {
+                display: none;
+            }
+
+            .search-container {
+                margin-top: 20px;
+            }
+
+            .tool-card {
+                padding: 18px;
+            }
+        }
+    </style>
+<style id="mk-version-footer-style">
+.mk-version-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:5px auto 17px;padding:0 10px;color:#9aa3b2;font:600 10px/1.35 "DM Sans",Inter,Arial,sans-serif}
+.mk-version-footer-label{margin-right:3px;color:#9aa3b2;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.mk-version-footer a,.mk-version-footer a:visited{display:inline-flex;align-items:center;justify-content:center;min-height:23px;padding:4px 10px;border:1px solid #e5e9ef;border-radius:999px;background:rgba(255,255,255,.88);color:#667085!important;text-decoration:none!important;font:700 10px/1 Inter,Arial,sans-serif;transition:background .16s ease,color .16s ease,border-color .16s ease}
+.mk-version-footer a:hover{background:#f1f4f8;border-color:#cbd5e1;color:#253247!important}
+.mk-version-footer a.is-active{background:#263244;border-color:#263244;color:#fff!important;box-shadow:0 2px 6px rgba(25,35,52,.12)}
+.mk-version-footer a:focus-visible{outline:2px solid #6da4ed;outline-offset:2px}
+@media(max-width:600px){.mk-version-footer{margin-bottom:14px}.mk-version-footer-label{font-size:8px}}
+</style>
+</head>
+
+<body>
+
+<!-- =============================================================
+     HEADER
+============================================================= -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🛠️
+            </div>
+
+            <div class="brand-text">
+
+                <h1>My HTML Tools</h1>
+
+                <p>Personal Tools Hub</p>
+
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="icon-button"
+                id="themeButton"
+                title="Toggle dark/light mode"
+                aria-label="Toggle theme">
+                🌙
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =============================================================
+     MAIN
+============================================================= -->
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h2>Welcome 👋</h2>
+
+        <p>
+            All your tools in one place.
+            Search, organize and launch your utilities quickly.
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search tools..."
+                autocomplete="off">
+
+            <button
+                class="clear-search"
+                id="clearSearch"
+                aria-label="Clear search">
+                ✕
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CATEGORIES
+    ========================================================== -->
+
+    <div
+        class="categories"
+        id="categories">
+
+        <!-- Generated by JavaScript -->
+
+    </div>
+
+
+    <!-- =========================================================
+         FAVORITES
+    ========================================================== -->
+
+    <section
+        class="section"
+        id="favoritesSection">
+
+        <div class="section-header">
+
+            <h3 class="section-title">
+                ⭐ Favorites
+            </h3>
+
+            <span
+                class="section-count"
+                id="favoriteCount">
+                0 tools
+            </span>
+
+        </div>
+
+        <div
+            class="tool-grid"
+            id="favoriteGrid">
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         RECENTLY USED
+    ========================================================== -->
+
+    <section
+        class="section"
+        id="recentSection">
+
+        <div class="section-header">
+
+            <h3 class="section-title">
+                🕐 Recently Used
+            </h3>
+
+        </div>
+
+        <div
+            class="recent-list"
+            id="recentList">
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         ALL TOOLS
+    ========================================================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h3 class="section-title">
+                📂 All Tools
+            </h3>
+
+            <span
+                class="section-count"
+                id="toolCount">
+                0 tools
+            </span>
+
+        </div>
+
+        <div
+            class="tool-grid"
+            id="toolGrid">
+
+        </div>
+
+    </section>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+        class="empty-state"
+        id="emptyState">
+
+        <div class="empty-state-icon">
+            🔎
+        </div>
+
+        <h3>
+            No tools found
+        </h3>
+
+        <p>
+            Try another search or category.
+        </p>
+
+    </div>
+
+</main>
+
+
+<footer>
+    My HTML Tools • GitHub Pages
+</footer>
+<nav class="mk-version-footer" aria-label="Choose dashboard version"><span class="mk-version-footer-label">Dashboard</span><a href="legacy.html" class="is-active" aria-current="page">Legacy</a><a href="index.html">Enhanced</a></nav>
+
+
+
+<script>
+
+/* =============================================================
+   TOOL DATABASE
+   =============================================================
+
+   ADD YOUR TOOLS HERE.
+
+   path = location of your tool
+
+   Example:
+
+   tools/
+      batch-stock/
+         index.html
+
+   path:
+      "tools/batch-stock/index.html"
+
+============================================================= */
+
+const tools = [
+
+    {
+        id: "batch-stock",
+        name: "Batch Stock Lookup",
+        icon: "📦",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Check multiple product codes, stock quantities, vintage changes and unavailable products.",
+        path: "tools/batch-stock/index.html"
+    },
+
+    {
+        id: "Event",
+        name: "Evant Ticket  - 2.0",
+        icon: "🕷️",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "UTILITY",
+        description:
+            "Create event ticket cards by entering the product URL, image, title, date, time, location and price. Preview the finished card and copy the ready-to-use HTML.",
+        path: "tools/Event/index.html"
+    },
+
+    {
+        id: "Mini HTML",
+        name: "Mini HTML",
+        icon: "📄",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Format and edit HTML snippets with paragraph, bold, italic, underline and link controls. Preview the result, then copy the HTML with or without extra spaces.",
+        path: "tools/Mini HTML/index.html"
+    },
+
+    {
+        id: "Gift PDP page",
+        name: "Gift PDP page",
+        icon: "📊",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Generate Gift Page SOP content from a PDP code, product contents, delivery information and allergen details. Save and manage PDP entries, and import or export backups.",
+        path: "tools/Gift PDP page/index.html"
+    },
+
+    {
+        id: "VandingPage",
+        name: "VandingPage",
+        icon: "🖼️",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Create responsive landing-page content blocks with promotional copy, product images and pricing. Preview the layout, then copy or download the generated HTML.",
+        path: "tools/VandingPage/index.html"
+    },
+
+    {
+        id: "Akamai",
+        name: "Akamai",
+        icon: "🎨",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Generate Akamai image-cache clearing links for the UK, US or APAC market. Build a list of URLs, copy all links, and open Akamai from the tool.",
+        path: "tools/Akamai/index.html"
+    },
+
+    {
+        id: "Pageturner",
+        name: "Pageturner",
+        icon: "⚙️",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Upload one or more PDFs to extract and verify order codes, remove duplicates, and export the results for Laithwaites, Sunday Times or Averys.",
+        path: "tools/Pageturner/index.html"
+    },
+
+        {
+        id: "Monthly AHD",
+        name: "Monthly AHD",
+        icon: "🟩",
+        category: "Work",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Turn an Excel or CSV report into a PivotTable-style monthly category summary. Map the worksheet and columns, calculate row and grand totals, then copy the table or download it as CSV.",
+        path: "tools/monthly_ahd/index.html"
+    },
+
+    {
+        id: "FrameTool",
+        name: "FrameTool",
+        icon: "🍷",
+        category: "PTTG",
+        status: "UTILITY",
+        statusClass: "utility",
+        description:
+            "Upload an image and create a solid-colour or directional gradient frame around it. Adjust the frame colours and gradient direction, then download the result as a PNG.",
+        path: "tools/frametool/index.html"
+    },
+
+    {
+        id: "Photoshop",
+        name: "Photoshop",
+        icon: "📋",
+        category: "PTTG",
+        status: "Beta",
+        statusClass: "beta",
+        description:
+            "Edit and frame images on a custom-size canvas with layers, crop and zoom, brush and eraser tools, selections, gradients, blur, healing, image adjustments and PNG export.",
+        path: "tools/Photoshop/index.html"
+    },
+
+    
+
+    {
+        id: "excel-tools",
+        name: "Excel Tools",
+        icon: "📈",
+        category: "Data",
+        status: "COMING SOON",
+        statusClass: "testing",
+        description:
+            "Browser-based utilities for working with Excel-style data.",
+        path: null
+    },
+
+    {
+        id: "inzone-buds",
+        name: "INZONE Buds Battery",
+        icon: "🎧",
+        category: "Personal",
+        status: "NEW",
+        statusClass: "new",
+        description:
+            "Connect the Sony INZONE Buds USB dongle to view the left earbud, right earbud and charging-case battery levels. Refresh readings or disconnect the device.",
+        path: "tools/inzone-buds/index.html"
+    }
+];
+
+
+/* =============================================================
+   LOCAL STORAGE
+============================================================= */
+
+let favorites =
+    JSON.parse(localStorage.getItem("htmlToolsFavorites")) || [];
+
+let recent =
+    JSON.parse(localStorage.getItem("htmlToolsRecent")) || [];
+
+let currentCategory = "All";
+
+
+/* =============================================================
+   ELEMENTS
+============================================================= */
+
+const toolGrid =
+    document.getElementById("toolGrid");
+
+const favoriteGrid =
+    document.getElementById("favoriteGrid");
+
+const recentList =
+    document.getElementById("recentList");
+
+const categories =
+    document.getElementById("categories");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const clearSearch =
+    document.getElementById("clearSearch");
+
+const emptyState =
+    document.getElementById("emptyState");
+
+const favoritesSection =
+    document.getElementById("favoritesSection");
+
+const recentSection =
+    document.getElementById("recentSection");
+
+const favoriteCount =
+    document.getElementById("favoriteCount");
+
+const toolCount =
+    document.getElementById("toolCount");
+
+const themeButton =
+    document.getElementById("themeButton");
+
+
+/* =============================================================
+   CATEGORIES
+============================================================= */
+
+function createCategories() {
+
+    const uniqueCategories = [
+        "All",
+        "Favorites",
+        ...new Set(tools.map(tool => tool.category))
+    ];
+
+    categories.innerHTML = "";
+
+    uniqueCategories.forEach(category => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "category-button" +
+            (category === currentCategory
+                ? " active"
+                : "");
+
+        button.textContent =
+            category === "Favorites"
+                ? "⭐ Favorites"
+                : category === "All"
+                    ? "All"
+                    : category;
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                currentCategory =
+                    category;
+
+                createCategories();
+
+                render();
+
+            }
+        );
+
+        categories.appendChild(button);
+
+    });
+
+}
+
+
+/* =============================================================
+   CREATE TOOL CARD
+============================================================= */
+
+function createToolCard(tool) {
+
+    const card =
+        document.createElement("article");
+
+    card.className = "tool-card";
+
+    const isFavorite =
+        favorites.includes(tool.id);
+
+    card.innerHTML = `
+
+        <div class="card-top">
+
+            <div class="tool-icon">
+                ${tool.icon}
+            </div>
+
+            <button
+                class="favorite-button ${isFavorite ? "active" : ""}"
+                title="${isFavorite ? "Remove from favorites" : "Add to favorites"}"
+                aria-label="Favorite">
+
+                ${isFavorite ? "★" : "☆"}
+
+            </button>
+
+        </div>
+
+        <h4 class="tool-name">
+            ${tool.name}
+        </h4>
+
+        <p class="tool-description">
+            ${tool.description}
+        </p>
+
+        <div class="card-meta">
+
+            <span class="tag ${tool.statusClass}">
+                ${getStatusIcon(tool.status)}
+                ${tool.status}
+            </span>
+
+            <span class="category-label">
+                ${tool.category}
+            </span>
+
+        </div>
+
+        <button
+            class="open-button">
+            Open Tool →
+        </button>
+
+    `;
+
+
+    /* Favorite */
+
+    const favoriteButton =
+        card.querySelector(".favorite-button");
+
+    favoriteButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            toggleFavorite(tool.id);
+
+        }
+    );
+
+
+    /* Open tool */
+    const openButton = card.querySelector(".open-button");
+    if (tool.path) {
+        openButton.addEventListener("click", () => {
+            addToRecent(tool.id);
+            window.location.href = tool.path;
+        });
+    } else {
+        openButton.disabled = true;
+        openButton.textContent = "Coming Soon";
+        openButton.title = "This tool page has not been added yet.";
+    }
+
+    /* Allow clicking card */
+    card.addEventListener("click", event => {
+        if (event.target.closest(".favorite-button") || !tool.path) return;
+        addToRecent(tool.id);
+        window.location.href = tool.path;
+    });
+    return card;
+
+}
+
+
+/* =============================================================
+   STATUS ICON
+============================================================= */
+
+function getStatusIcon(status) {
+
+    switch (status) {
+
+        case "NEW":
+            return "🆕";
+
+        case "BETA":
+            return "🔵";
+
+        case "TESTING":
+            return "🟡";
+
+        case "UTILITY":
+            return "🟢";
+
+        default:
+            return "⚪";
+
+    }
+
+}
+
+
+/* =============================================================
+   FAVORITES
+============================================================= */
+
+function toggleFavorite(id) {
+
+    if (favorites.includes(id)) {
+
+        favorites =
+            favorites.filter(
+                item => item !== id
+            );
+
+    } else {
+
+        favorites.push(id);
+
+    }
+
+    localStorage.setItem(
+        "htmlToolsFavorites",
+        JSON.stringify(favorites)
+    );
+
+    render();
+
+}
+
+
+/* =============================================================
+   RECENTLY USED
+============================================================= */
+
+function addToRecent(id) {
+
+    recent =
+        recent.filter(
+            item => item.id !== id
+        );
+
+    recent.unshift({
+
+        id: id,
+
+        time: Date.now()
+
+    });
+
+    /* Keep last 5 */
+
+    recent =
+        recent.slice(0, 5);
+
+    localStorage.setItem(
+        "htmlToolsRecent",
+        JSON.stringify(recent)
+    );
+
+}
+
+
+/* =============================================================
+   RECENT LIST
+============================================================= */
+
+function renderRecent() {
+
+    recentList.innerHTML = "";
+
+    if (recent.length === 0) {
+
+        recentSection.style.display =
+            "none";
+
+        return;
+
+    }
+
+    recentSection.style.display =
+        "block";
+
+
+    recent.forEach(item => {
+
+        const tool =
+            tools.find(
+                t => t.id === item.id
+            );
+
+        if (!tool) return;
+
+
+        const element =
+            document.createElement("div");
+
+        element.className =
+            "recent-item";
+
+        element.innerHTML = `
+
+            <span>
+                ${tool.icon}
+            </span>
+
+            <strong>
+                ${tool.name}
+            </strong>
+
+            <span class="recent-time">
+                ${timeAgo(item.time)}
+            </span>
+
+        `;
+
+        element.addEventListener(
+            "click",
+            () => {
+
+                addToRecent(tool.id);
+
+                window.location.href =
+                    tool.path;
+
+            }
+        );
+
+        recentList.appendChild(
+            element
+        );
+
+    });
+
+}
+
+
+/* =============================================================
+   TIME AGO
+============================================================= */
+
+function timeAgo(timestamp) {
+
+    const seconds =
+        Math.floor(
+            (Date.now() - timestamp) / 1000
+        );
+
+    if (seconds < 60)
+        return "just now";
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    if (minutes < 60)
+        return `${minutes}m ago`;
+
+    const hours =
+        Math.floor(minutes / 60);
+
+    if (hours < 24)
+        return `${hours}h ago`;
+
+    const days =
+        Math.floor(hours / 24);
+
+    return `${days}d ago`;
+
+}
+
+
+/* =============================================================
+   SEARCH + FILTER
+============================================================= */
+
+function getFilteredTools() {
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    let filtered =
+        [...tools];
+
+
+    /* Category */
+
+    if (currentCategory === "Favorites") {
+
+        filtered =
+            filtered.filter(
+                tool =>
+                    favorites.includes(
+                        tool.id
+                    )
+            );
+
+    }
+
+    else if (currentCategory !== "All") {
+
+        filtered =
+            filtered.filter(
+                tool =>
+                    tool.category ===
+                    currentCategory
+            );
+
+    }
+
+
+    /* Search */
+
+    if (search) {
+
+        filtered =
+            filtered.filter(tool => {
+
+                return (
+
+                    tool.name
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    tool.description
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    tool.category
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    tool.status
+                        .toLowerCase()
+                        .includes(search)
+
+                );
+
+            });
+
+    }
+
+
+    return filtered;
+
+}
+
+
+/* =============================================================
+   RENDER
+============================================================= */
+
+function render() {
+
+    const filtered =
+        getFilteredTools();
+
+
+    /* Main grid */
+
+    toolGrid.innerHTML = "";
+
+    filtered.forEach(tool => {
+
+        toolGrid.appendChild(
+            createToolCard(tool)
+        );
+
+    });
+
+
+    /* Count */
+
+    toolCount.textContent =
+        `${filtered.length} ${
+            filtered.length === 1
+                ? "tool"
+                : "tools"
+        }`;
+
+
+    /* Favorites */
+
+    const favoriteTools =
+        tools.filter(
+            tool =>
+                favorites.includes(
+                    tool.id
+                )
+        );
+
+
+    favoriteGrid.innerHTML = "";
+
+    favoriteTools.forEach(tool => {
+
+        favoriteGrid.appendChild(
+            createToolCard(tool)
+        );
+
+    });
+
+
+    favoriteCount.textContent =
+        `${favoriteTools.length} ${
+            favoriteTools.length === 1
+                ? "tool"
+                : "tools"
+        }`;
+
+
+    favoritesSection.style.display =
+        favoriteTools.length > 0
+            ? "block"
+            : "none";
+
+
+    /* Recent */
+
+    renderRecent();
+
+
+    /* Empty */
+
+    emptyState.style.display =
+        filtered.length === 0
+            ? "block"
+            : "none";
+
+}
+
+
+/* =============================================================
+   SEARCH EVENTS
+============================================================= */
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        clearSearch.style.display =
+            searchInput.value
+                ? "block"
+                : "none";
+
+        render();
+
+    }
+);
+
+
+clearSearch.addEventListener(
+    "click",
+    () => {
+
+        searchInput.value = "";
+
+        clearSearch.style.display =
+            "none";
+
+        searchInput.focus();
+
+        render();
+
+    }
+);
+
+
+/* =============================================================
+   DARK / LIGHT MODE
+============================================================= */
+
+function setTheme(theme) {
+
+    if (theme === "dark") {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+        themeButton.textContent =
+            "☀️";
+
+        themeButton.title =
+            "Switch to light mode";
+
+    } else {
+
+        document.body.classList.remove(
+            "dark"
+        );
+
+        themeButton.textContent =
+            "🌙";
+
+        themeButton.title =
+            "Switch to dark mode";
+
+    }
+
+    localStorage.setItem(
+        "htmlToolsTheme",
+        theme
+    );
+
+}
+
+
+/* Load saved theme */
+
+const savedTheme =
+    localStorage.getItem(
+        "htmlToolsTheme"
+    );
+
+
+if (savedTheme) {
+
+    setTheme(savedTheme);
+
+} else {
+
+    /* Follow system preference */
+
+    const prefersDark =
+        window.matchMedia &&
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches;
+
+    setTheme(
+        prefersDark
+            ? "dark"
+            : "light"
+    );
+
+}
+
+
+/* Toggle */
+
+themeButton.addEventListener(
+    "click",
+    () => {
+
+        const isDark =
+            document.body.classList.contains(
+                "dark"
+            );
+
+        setTheme(
+            isDark
+                ? "light"
+                : "dark"
+        );
+
+    }
+);
+
+
+/* =============================================================
+   INITIALIZE
+============================================================= */
+
+createCategories();
+
+render();
+
+</script>
+
+
+<style id="mh-meta-panels">
+.mh-meta-footer{max-width:1400px;margin:24px auto 8px;padding:16px 10px;border-top:1px solid rgba(148,163,184,.32);color:var(--muted,#94a3b8);text-align:center;font-family:inherit;font-size:13px;line-height:1.8;position:relative;z-index:5}
+.mh-meta-credit{color:var(--text,currentColor);font-weight:750}
+.mh-meta-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px}
+.mh-meta-sep{color:#94a3b8;opacity:.7}
+.mh-meta-action{appearance:none;border:0!important;background:transparent!important;color:var(--primary,var(--accent,#38bdf8))!important;padding:0!important;margin:0!important;font:inherit!important;font-weight:700!important;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.mh-meta-action:hover{filter:brightness(1.2)}
+.mh-meta-backdrop{position:fixed;inset:0;z-index:2147483600;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,23,.78)}
+.mh-meta-backdrop[hidden]{display:none!important}
+.mh-meta-dialog{width:min(100%,650px);max-height:min(82vh,760px);overflow:auto;padding:24px;border:1px solid #334155;border-radius:16px;background:#111827;color:#e5e7eb;box-shadow:0 24px 70px rgba(0,0,0,.48);font:14px/1.6 Inter,"Segoe UI",Arial,sans-serif}
+.mh-meta-dialog:focus{outline:none}
+.mh-meta-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}
+.mh-meta-dialog h2{margin:0;color:#38bdf8;font-size:21px;line-height:1.3}
+.mh-meta-dialog h3{margin:0 0 6px;color:#e2e8f0;font-size:15px}
+.mh-meta-intro{margin:8px 0 16px;color:#cbd5e1;font-size:14px;line-height:1.65}
+.mh-meta-close{flex:0 0 auto;appearance:none;border:1px solid #475569!important;border-radius:9px!important;background:#1e293b!important;color:#f8fafc!important;padding:5px 10px!important;font-size:20px!important;line-height:1.2;cursor:pointer}
+.mh-meta-close:hover{background:#334155!important}
+.mh-meta-section{margin-top:13px;padding:15px 16px;border:1px solid #334155;border-left:3px solid #38bdf8;border-radius:10px;background:#0f172a}
+.mh-meta-section ul{margin:7px 0 0;padding-left:20px;color:#cbd5e1;line-height:1.7}
+.mh-meta-section li+li{margin-top:4px}
+.mh-meta-date{margin:3px 0 9px;color:#94a3b8;font-size:12px}
+@media(max-width:600px){.mh-meta-dialog{padding:18px}.mh-meta-footer{margin-top:18px}}
+
+body.mh-meta-modal-open{overflow:hidden}
+</style>
+<footer class="mh-meta-footer">
+  <div class="mh-meta-credit">Created by Mahendran</div>
+  <div class="mh-meta-links">
+    <button type="button" class="mh-meta-action" id="mhOpenInfo" aria-haspopup="dialog" aria-controls="mhInfoModal">Info</button>
+    <span class="mh-meta-sep" aria-hidden="true">|</span>
+    <span>Version 1.0</span>
+    <span class="mh-meta-sep" aria-hidden="true">|</span>
+    <button type="button" class="mh-meta-action" id="mhOpenPatch" aria-haspopup="dialog" aria-controls="mhPatchModal">Patch Notes</button>
+  </div>
+</footer>
+<div class="mh-meta-backdrop" id="mhInfoModal" hidden>
+  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhInfoTitle" aria-describedby="mhInfoIntro" tabindex="-1">
+    <div class="mh-meta-dialog-header"><h2 id="mhInfoTitle">My HTML Tools Dashboard</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close information">×</button></div>
+    <p class="mh-meta-intro" id="mhInfoIntro">Your central dashboard for launching and organising the browser-based tools in this repository.</p>
+    <article class="mh-meta-section"><h3>Find a tool</h3><ul><li>Use the search box to filter tools by name, description, category or status.</li><li>Choose a category chip such as Work, PTTG, Data or Personal to narrow the list.</li></ul></article><article class="mh-meta-section"><h3>Organise your tools</h3><ul><li>Click the star on a card to add or remove it from Favorites. Favorites are saved in this browser.</li><li>Recently Used shows the last five tools you opened on this browser.</li></ul></article><article class="mh-meta-section"><h3>Personalise the dashboard</h3><ul><li>Use the moon/sun button in the top-right corner to switch between dark and light themes. Your theme choice is remembered.</li><li>Select Open Tool on a card to launch that tool. Items marked Coming Soon are not available yet.</li></ul></article>
+  </section>
+</div>
+<div class="mh-meta-backdrop" id="mhPatchModal" hidden>
+  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhPatchTitle" aria-describedby="mhPatchIntro" tabindex="-1">
+    <div class="mh-meta-dialog-header"><h2 id="mhPatchTitle">Patch Notes &amp; History</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close patch notes">×</button></div>
+    <p class="mh-meta-intro" id="mhPatchIntro">Version history and interface updates for My HTML Tools Dashboard.</p>
+    <article class="mh-meta-section">
+      <h3>Version 1.0 — Tool information panel</h3>
+      <div class="mh-meta-date">19 November 2026</div>
+      <ul>
+        <li>Added the Created by Mahendran credit and a consistent version display.</li>
+        <li>Added this Info guide with instructions for the tool's existing features.</li>
+        <li>Added a clickable Patch Notes history panel.</li>
+        <li>Kept the existing tool workflow and functionality intact.</li>
+      </ul>
+    </article>
+  </section>
+</div>
+<script id="mh-meta-panel-script">
+(function () {
+  const infoModal = document.getElementById('mhInfoModal');
+  const patchModal = document.getElementById('mhPatchModal');
+  const openInfo = document.getElementById('mhOpenInfo');
+  const openPatch = document.getElementById('mhOpenPatch');
+  if (!infoModal || !patchModal || !openInfo || !openPatch) return;
+  let activeModal = null;
+  let previousFocus = null;
+  function openModal(modal) {
+    if (activeModal) closeModal(activeModal, false);
+    previousFocus = document.activeElement;
+    activeModal = modal;
+    modal.hidden = false;
+    document.body.classList.add('mh-meta-modal-open');
+    modal.querySelector('.mh-meta-dialog').focus();
+  }
+  function closeModal(modal, restoreFocus = true) {
+    modal.hidden = true;
+    activeModal = null;
+    document.body.classList.remove('mh-meta-modal-open');
+    if (restoreFocus && previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+  }
+  openInfo.addEventListener('click', () => openModal(infoModal));
+  openPatch.addEventListener('click', () => openModal(patchModal));
+  [infoModal, patchModal].forEach(modal => {
+    modal.addEventListener('click', event => {
+      if (event.target === modal || event.target.closest('[data-mh-close]')) closeModal(modal);
+    });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && activeModal) closeModal(activeModal);
+  });
+})();
+</script>
+</body>
+</html>
+```
