@@ -1,478 +1,264 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Batch Stock Lookup</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Batch Stock Lookup</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-    :root {
-      /* Default = Dark Mode */
-      --bg: #1e1f23;
-      --panel: #2b2d31;
-      --text: #e0e0e0;
-      --muted: #a0a0a0;
-      --accent: #CF004F;
-      --accent-hover: #095a9c;
-      --table-bg: #2a2b2f;
-      --border: #3c3c42;
-    }
-
-    body.light-mode {
-      --bg: #f5f5f5;
-      --panel: #fff;
-      --text: #222;
-      --muted: #555;
-      --accent: #CF004F;
-      --accent-hover: #095a9c;
-      --table-bg: #fff;
-      --border: #ddd;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    h1, h2 { color: var(--text); }
-    p { color: var(--muted); }
-
-    textarea {
-      width: 25%;
-      height: 150px;
-      margin-bottom: 5px;
-      padding: 10px;
-      font-size: 14px;
-      background: var(--panel);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: background 0.3s, color 0.3s, border 0.3s;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-
-    .controls button { margin-right: 10px; }
-    .line-count { font-size: 18px; color: var(--muted); margin-right: auto; }
-
-    button {
-      padding: 8px 12px;
-      margin: 5px;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover { background: var(--accent-hover); }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: var(--table-bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px;
-      text-align: left;
-    }
-
-    th {
-      background: var(--accent);
-      color: white;
-    }
-
-    .invalid {
-      background-color: #FFCCCB;
-      color: #000000;
-      font-weight: bold;
-    }
-
-    .valid-green {
-      background-color: #C1E1C1;
-      color: #000000;
-      font-weight: bold;
-    }
-
-    /* Loading overlay */
-    #loadingOverlay {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0,0,0,0.9);
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      z-index: 9999;
-      color: #fff;
-      font-size: 14px;
-      pointer-events: none;
-    }
-    .progress-container {
-      width: 260px;
-      background: #444;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    .progress-bar {
-      height: 20px;
-      width: 0%;
-      background: #4caf50;
-      text-align: center;
-      color: #fff;
-      font-weight: bold;
-      transition: width 0.2s ease;
-      font-size: 12px;
-      pointer-events: auto;
-    }
-
-    .signature {
-      margin-top: 50px;
-      font-size: 14px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    #loadingOverlay > * { pointer-events: auto; }
-
-    /* Toggle + input */
-    .toggle-container { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
-    #stockThresholdInput {
-      display: none;
-      width: 80px;
-      padding: 5px;
-      font-size: 14px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      color: var(--text);
-    }
-	 /* Theme toggle switch */
-    .theme-toggle {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .theme-toggle input {
-      width: 40px;
-      height: 20px;
-      appearance: none;
-      background: var(--border);
-      border-radius: 20px;
-      position: relative;
-      cursor: pointer;
-      outline: none;
-      transition: background 0.3s;
-    }
-    .theme-toggle input:checked {
-      background: var(--accent);
-    }
-    .theme-toggle input::before {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.3s;
-    }
-    .theme-toggle input:checked::before {
-      transform: translateX(20px);
-    }
-.info-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.close-info {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: var(--muted);
-}
-.close-info:hover {
-  color: var(--accent);
-}
-
-.input-row {
-  display: flex;
-  gap: 20px; /* space between textarea and info box */
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.input-left {
-  flex: 1; /* textarea takes available space */
-}
-
-.info-box {
-  flex: 1; /* info box takes equal width (can adjust) */
-  padding: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text);
-  background: var(--panel);
-  border-left: 3px solid var(--accent);
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-}
-
-
-
-  
-    /* Dynamic vintage controls */
-    .vintage-controls { display:flex; flex-direction:column; gap:9px; margin:8px 0 12px; }
-    .vintage-controls-top, .vintage-manual { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
-    #autoVintageBtn:disabled { opacity:.6; cursor:wait; }
-    .vintage-range-label, .vintage-help { color:var(--muted); font-size:12px; }
-    .vintage-manual label { color:var(--text); font-size:13px; font-weight:bold; }
-    #manualVintageInput { width:145px; max-width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:5px; background:var(--panel); color:var(--text); font-size:14px; }
-    #manualVintageInput:focus { outline:2px solid var(--accent); outline-offset:1px; }
-    @media (max-width:600px) {
-      .vintage-controls-top, .vintage-manual { align-items:flex-start; }
-      .vintage-help { flex-basis:100%; }
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171717">
+<title>Batch Stock Lookup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{color-scheme:light;--canvas:#f5f6f8;--surface:#fff;--ink:#202535;--muted:#929bad;--line:#e7eaf0;--gold:#d7aa50;--green:#20b875;--red:#f04444;--blue:#4c79e8;--orange:#f59e0b;--sidebar:#171717;--side-muted:#a6a9b1;--side-line:#30343d;--shadow:0 2px 12px rgba(21,31,54,.035)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"DM Sans",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--canvas);color:var(--ink)}
+button,input,textarea{font:inherit}
+.app-shell{min-height:100vh;display:grid;grid-template-columns:320px minmax(0,1fr)}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;padding:27px 24px 22px;background:linear-gradient(180deg,#111 0%,#242424 55%,#626262 100%);color:#f8fafc;display:flex;flex-direction:column;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;padding:0 4px 4px}
+.brand-mark{width:30px;height:30px;display:grid;place-items:center;color:var(--gold)}
+.brand-mark svg{width:22px;height:22px}
+.brand-name{font-size:15px;font-weight:750;letter-spacing:-.2px}
+.input-wrap{display:flex;flex-direction:column;gap:7px;margin-top:12px}
+#productList{display:block;width:100%;height:158px;resize:vertical;padding:12px;border:1px solid #343d55;border-radius:7px;background:#10162b;color:#dfe6f6;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;outline:none}
+#productList:focus{border-color:#d7aa50;box-shadow:0 0 0 3px rgba(215,170,80,.13)}
+#productList::placeholder{color:#8791a8}
+.line-count{font-size:11px;color:#9aa4b8;padding-left:2px}
+.side-primary{width:100%;min-height:42px;border:0;border-radius:7px;background:var(--gold);color:#161616;font-size:13px;font-weight:750;cursor:pointer;transition:filter .18s,transform .18s}
+.side-primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.side-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.side-actions button,.side-secondary{min-height:34px;padding:7px 8px;border:1px solid #353b49;border-radius:6px;background:rgba(34,39,51,.68);color:#f2f4f8;font-size:11px;cursor:pointer}
+.side-actions button:hover,.side-secondary:hover{background:#343c50}
+.threshold-row{display:flex;align-items:center;gap:9px;color:#e5e7eb;font-size:12px;padding:4px 0}
+.threshold-row input{accent-color:var(--gold)}
+#stockThresholdInput{display:none;width:76px;padding:5px 7px;border:1px solid #4a5365;border-radius:5px;background:#171b26;color:#fff}
+.side-divider{height:1px;background:var(--side-line);margin:4px 0}
+.side-section-label{font-size:10px;font-weight:700;letter-spacing:1px;color:#aeb5c4;margin-bottom:2px}
+.vintage-controls{display:flex;flex-direction:column;gap:9px}
+.vintage-controls-top,.vintage-manual{display:flex;flex-wrap:wrap;gap:7px}
+.vintage-controls-top button,.vintage-manual button{min-height:32px;padding:7px 9px;border:1px solid #41495b;border-radius:6px;background:#252b39;color:#f4f6fa;font-size:11px;cursor:pointer}
+.vintage-controls-top button:hover,.vintage-manual button:hover{border-color:var(--gold)}
+#autoVintageBtn{background:#d7aa50;border-color:#d7aa50;color:#161616;font-weight:700}
+#autoVintageBtn:disabled{opacity:.6;cursor:wait}
+.vintage-range-label,.vintage-help{font-size:10px;line-height:1.5;color:#aeb5c4}
+.vintage-manual label{flex-basis:100%;font-size:11px;color:#e4e7ee;font-weight:600}
+#manualVintageInput{width:100%;padding:8px 9px;border:1px solid #424b5d;border-radius:6px;background:#171b26;color:#fff;font-size:12px}
+#manualVintageInput:focus{outline:2px solid rgba(215,170,80,.6);outline-offset:1px}
+.vintage-help{flex-basis:100%}
+.hub-link{margin-top:auto;display:inline-flex;align-items:center;gap:7px;color:#d9dee8;text-decoration:none;font-size:11px;opacity:.8}
+.hub-link:hover{opacity:1;color:#fff}
+.workspace{min-width:0;padding:22px 24px 28px;display:flex;flex-direction:column;gap:14px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:30px}
+.page-heading{font-size:17px;font-weight:750;letter-spacing:-.45px;margin:0}
+.workflow{display:flex;align-items:center;gap:8px;color:#a0a9b9;font-size:11px;white-space:nowrap}
+.workflow-dot{width:8px;height:8px;border-radius:50%;background:#b7c0cf}
+.summary-strip{min-height:34px;display:flex;align-items:center;gap:9px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#343b4a;font-size:11px;font-weight:650}
+.summary-check{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#e9f8f0;color:#1aaf70;font-size:12px}
+.results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:minmax(290px,1fr) minmax(290px,1fr);gap:12px;flex:1}
+.result-card{min-width:0;min-height:290px;padding:12px 10px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.card-heading{display:flex;align-items:center;gap:10px;min-width:0;margin:0 0 12px;padding:0 0 0 0}
+.card-accent{height:6px;flex:1;min-width:50px;border-radius:99px}
+.valid-card .card-accent{background:#6bc997}
+.invalid-card .card-accent{background:#ff3038}
+.vintage-card .card-accent{background:#4c79e8}
+.happy-card .card-accent{background:#f59e0b}
+.card-heading h2{margin:0;font-size:12px;font-weight:750;white-space:nowrap}
+.card-count{font-size:10px;color:#9aa3b4;white-space:nowrap}
+.table-scroll{width:100%;overflow:auto;border:1px solid #edf0f4;border-radius:7px}
+table{width:100%;border-collapse:collapse;min-width:450px;background:#fff;color:#252b38;font-size:10px}
+th{padding:7px 8px;background:#f2f4f7;color:#667085;text-align:left;font-weight:700;white-space:nowrap;border-bottom:1px solid #e7eaf0}
+td{padding:6px 8px;border-bottom:1px solid #edf0f4;white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even){background:#fafbfc}
+#validTable td:nth-child(2),#invalidTable td:nth-child(2),#vintageTable td:nth-child(2),#vintageTable td:nth-child(3),#happyTable td:nth-child(2),#happyTable td:nth-child(3){font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.valid-green td:nth-child(5),#validTable td:nth-child(4){color:#159b62;font-weight:700}
+.invalid td:nth-child(4),#invalidTable td:nth-child(4){color:#e83e3e;font-weight:700}
+#happyTable td:nth-child(5){color:#bd7b00;font-weight:700}
+#loadingOverlay{position:fixed;right:22px;bottom:22px;z-index:9999;display:none;flex-direction:column;align-items:stretch;gap:7px;min-width:280px;padding:15px;border:1px solid #30394c;border-radius:12px;background:#111827;color:#fff;font-size:12px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.progress-container{height:8px;width:100%;overflow:hidden;border-radius:99px;background:#374151}
+.progress-bar{height:100%;width:0;background:#38b879;color:transparent;font-size:0;transition:width .2s ease}
+#timeLeft,#fetchSummary{font-size:11px;color:#cbd5e1}
+.mh-meta-footer{max-width:none!important;margin:4px 0 0!important;padding:14px 8px 6px!important;border-top:1px solid #e5e8ee!important;color:#929bad!important;font-size:11px!important}
+.mh-meta-credit{color:#5b6474!important}
+.mh-meta-action{color:#64748b!important}
+.mh-meta-backdrop{z-index:2147483600}
+@media(max-width:1050px){.app-shell{grid-template-columns:280px minmax(0,1fr)}.sidebar{padding:22px 18px}.workspace{padding:18px}.results-grid{grid-template-rows:minmax(250px,1fr) minmax(250px,1fr)}}
+@media(max-width:760px){.app-shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto;max-height:none;padding:20px;gap:14px}.input-wrap{margin-top:0}#productList{height:110px}.hub-link{margin-top:0}.workspace{padding:16px}.results-grid{grid-template-columns:1fr;grid-template-rows:auto}.result-card{min-height:230px}.topbar{align-items:flex-start}.workflow{font-size:10px}}
+@media(max-width:420px){.workspace{padding:12px}.topbar{flex-direction:column;gap:6px}.side-actions{grid-template-columns:repeat(3,1fr)}}
 </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-<style id="html-tools-hub-navigation">
-  .html-tools-hub-link,
-  .html-tools-hub-link:visited {
-    position: fixed;
-    left: 16px;
-    bottom: 16px;
-    z-index: 2147483000;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 42px;
-    padding: 10px 15px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 999px;
-    background: rgba(15,23,42,.94);
-    color: #fff !important;
-    font: 650 13px/1.2 Inter, "Segoe UI", Arial, sans-serif;
-    letter-spacing: .1px;
-    text-decoration: none !important;
-    box-shadow: 0 6px 22px rgba(0,0,0,.24);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
-  }
-  .html-tools-hub-link:hover {
-    transform: translateY(-2px);
-    background: #2563eb;
-    color: #fff !important;
-    box-shadow: 0 9px 26px rgba(37,99,235,.32);
-  }
-  .html-tools-hub-link:focus-visible {
-    outline: 3px solid #60a5fa;
-    outline-offset: 3px;
-  }
-  .html-tools-hub-link .hub-arrow {
-    font-size: 17px;
-    line-height: 1;
-  }
-  @media (max-width: 600px) {
-    .html-tools-hub-link {
-      left: 10px;
-      bottom: 10px;
-      min-height: 40px;
-      padding: 9px 12px;
-      font-size: 12px;
-    }
-  }
-</style>
-
-<link rel="stylesheet" href="../../assets/maksoft-tool.css?v=5">
 </head>
 <body>
-<a class="html-tools-hub-link" href="../../index.html" title="Back to My HTML Tools" aria-label="Back to My HTML Tools"><span class="hub-arrow" aria-hidden="true">←</span><span>My HTML Tools</span></a>
-
-  
-
-   <div style="display:flex;align-items:center;gap:10px;">
-    <h1>Batch Stock Lookup</h1>
-    <div class="theme-toggle">
-      🌙<input type="checkbox" id="themeSwitch">☀️
-    </div>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8l-1 5a4 4 0 0 1-3 3.8A4 4 0 0 1 9 8L8 3Z" stroke="currentColor" stroke-width="1.7"/><path d="M9 6H5a4 4 0 0 0 4 4M15 6h4a4 4 0 0 1-4 4M12 12v6m-4 3h8m-6-3h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+    <span class="brand-name">Stock Lookup</span>
   </div>
-
-
-  
-  <div class="input-row">
-  <!-- Left side: textarea -->
-  <div class="input-left">
-   
-    <textarea id="productList" placeholder="Enter product codes..."></textarea>
-	 <p>Paste product codes (one per line):</p>
+  <div class="input-wrap">
+    <textarea id="productList" spellcheck="false" placeholder="Enter product codes, one per line..."></textarea>
+    <div class="line-count">Lines: <span id="lineCount">0</span></div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-    <!-- Right side: info box -->
-  <div class="info-box">
-    <h2>About this Tool</h2>
-    <p>
-      This Batch Stock Lookup tool is built to simplify large-scale product checks.  
-      Paste multiple product codes at once, and the system will automatically fetch 
-      real-time stock details, validate their availability, and flag invalid or outdated codes.  
-    </p>
-    <p>
-      Results are organized into clear categories — <strong>Valid Stock</strong>, 
-      <strong>Invalid/Remarks</strong>, <strong>Vintage Changes</strong>, 
-      and <strong>Happy to Wait</strong>.  
-    </p>
-    <p>
-      In short: faster lookups, fewer errors, and more confidence in your stock data.
-    </p>
-	<p>
-    <b style="color:red;">If the result shows an error/NA for an item, please double-check it with GV.</b>
-    </p>
-	<p>
-      version 2.0
-    </p>
+  <button class="side-primary" type="button" onclick="fetchAll()">⌕ &nbsp; Check Stock</button>
+  <div class="side-actions">
+    <button type="button" onclick="clearInput()">Clear</button>
+    <button type="button" onclick="clearCache()">Cache</button>
+    <button type="button" onclick="exportToExcel()">Export</button>
   </div>
-</div>
-  
-  <div class="controls">
-    <button onclick="clearInput()">Clear</button>
-    <button onclick="clearCache()">Clear Cache</button>
-    <span class="line-count">Lines: <span id="lineCount">0</span></span>
-  </div>
-  <button onclick="fetchAll()">Fetch Stock Info</button>
-  <button onclick="exportToExcel()">Export to Excel</button>
-  
-
-
-
-  <!-- Toggle for stock minimum -->
-  <div class="toggle-container">
-    <label>
-      <input type="checkbox" id="toggleThreshold" onchange="toggleThresholdInput()"> Enable custom Valid stock minimum
-    </label>
-    <input type="number" id="stockThresholdInput" min="1" value="13">
-  </div>
-
-  <!-- Invalid / Remarks Stock vintage controls -->
-  <h2>Invalid / Remarks Stock</h2>
+  <label class="threshold-row"><input type="checkbox" id="toggleThreshold" onchange="toggleThresholdInput()"> Custom min. stock <input type="number" id="stockThresholdInput" min="1" value="13" aria-label="Minimum stock threshold"></label>
+  <div class="side-divider"></div>
+  <div class="side-section-label">VINTAGE CHECK</div>
   <div class="vintage-controls">
     <div class="vintage-controls-top">
-      <button type="button" onclick="restoreDefault()" title="Restore the original product-code list and run the default stock check">Default Vintage</button>
-      <button type="button" id="autoVintageBtn" onclick="autoCheckVintage()" title="Automatically test the previous five years, current year and next five years">Auto Vintage Checker</button>
-      <span id="vintageRangeLabel" class="vintage-range-label">Auto range: loading...</span>
+      <button type="button" onclick="restoreDefault()" title="Restore the original product-code list and run the default stock check">Default</button>
+      <button type="button" id="autoVintageBtn" onclick="autoCheckVintage()" title="Automatically test the previous five years, current year and next five years">Auto Vintage</button>
     </div>
+    <span id="vintageRangeLabel" class="vintage-range-label">Auto range: loading...</span>
     <div class="vintage-manual">
-      <label for="manualVintageInput">Manual Vintage</label>
+      <label for="manualVintageInput">Manual vintage</label>
       <input type="number" id="manualVintageInput" inputmode="numeric" min="0" max="2099" step="1" placeholder="e.g. 2026 or 26" aria-describedby="manualVintageHelp">
       <button type="button" onclick="checkManualVintage()">Check Vintage</button>
       <span id="manualVintageHelp" class="vintage-help">Enter a 4-digit year or 1–2 digit vintage code.</span>
     </div>
   </div>
-  <table id="invalidTable">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Product Code</th>
-        <th>Product Name</th>
-        <th>Status</th>
-        <th>Stock Value</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <!-- Happy to Wait -->
-  <h2>Happy to Wait</h2>
-  <table id="happyTable">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Old Code</th>
-        <th>New Code</th>
-        <th>Product Name</th>
-        <th>Status</th>
-        <th>Stock Value</th>
-        <th>Happy To Wait Date</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <!-- Vintage Changed -->
-  <h2>Vintage Changed</h2>
-  <table id="vintageTable">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Old Code</th>
-        <th>New Code</th>
-        <th>Product Name</th>
-        <th>Status</th>
-        <th>Stock Quantity</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <!-- Valid -->
-  <h2>Valid Stock Quantity</h2>
-  <table id="validTable">
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th>Product Code</th>
-        <th>Product Name</th>
-        <th>Status</th>
-        <th>Stock Quantity</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <!-- Loading Screen -->
-  <div id="loadingOverlay">
+  <a class="hub-link" href="../../index.html"><span aria-hidden="true">←</span> My HTML Tools</a>
+</aside>
+<main class="workspace">
+  <header class="topbar">
+    <h1 class="page-heading">Batch Stock Lookup</h1>
+    <div class="workflow"><span class="workflow-dot"></span> Workflow state</div>
+  </header>
+  <div class="summary-strip"><span class="summary-check">✓</span><span>Ready to check product codes</span></div>
+  <section class="results-grid" aria-label="Stock lookup results">
+    <article class="result-card valid-card">
+      <div class="card-heading"><span class="card-accent"></span><h2>Valid Stock</h2><span class="card-count">In stock</span></div>
+      <div class="table-scroll"><table id="validTable"><thead><tr><th>No.</th><th>Product Code</th><th>Product Name</th><th>Status</th><th>Stock Qty</th></tr></thead><tbody></tbody></table></div>
+    </article>
+    <article class="result-card invalid-card">
+      <div class="card-heading"><span class="card-accent"></span><h2>Invalid / Still Unavailable</h2><span class="card-count">Not found</span></div>
+      <div class="table-scroll"><table id="invalidTable"><thead><tr><th>No.</th><th>Product Code</th><th>Product Name</th><th>Status</th><th>Stock Qty</th></tr></thead><tbody></tbody></table></div>
+    </article>
+    <article class="result-card vintage-card">
+      <div class="card-heading"><span class="card-accent"></span><h2>Vintage Changed</h2><span class="card-count">Updated code</span></div>
+      <div class="table-scroll"><table id="vintageTable"><thead><tr><th>No.</th><th>Old Code</th><th>New Code</th><th>Product Name</th><th>Status</th><th>Stock Qty</th></tr></thead><tbody></tbody></table></div>
+    </article>
+    <article class="result-card happy-card">
+      <div class="card-heading"><span class="card-accent"></span><h2>Happy to Wait</h2><span class="card-count">Pending</span></div>
+      <div class="table-scroll"><table id="happyTable"><thead><tr><th>No.</th><th>Old Code</th><th>New Code</th><th>Product Name</th><th>Status</th><th>Stock Value</th><th>Happy To Wait Date</th></tr></thead><tbody></tbody></table></div>
+    </article>
+  </section>
+  <div id="loadingOverlay" role="status" aria-live="polite">
     <div id="loadingText">Processing...</div>
     <div class="progress-container"><div class="progress-bar" id="progressBar">0%</div></div>
-    <div id="timeLeft"></div>
-    <div id="fetchSummary" style="margin-top:8px; font-size:13px;"></div>
+    <div id="timeLeft"></div><div id="fetchSummary"></div>
   </div>
+  <style id="mh-meta-panels">
+.mh-meta-footer{max-width:1400px;margin:24px auto 8px;padding:16px 10px;border-top:1px solid rgba(148,163,184,.32);color:var(--muted,#94a3b8);text-align:center;font-family:inherit;font-size:13px;line-height:1.8;position:relative;z-index:5}
+.mh-meta-credit{color:var(--text,currentColor);font-weight:750}
+.mh-meta-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px}
+.mh-meta-sep{color:#94a3b8;opacity:.7}
+.mh-meta-action{appearance:none;border:0!important;background:transparent!important;color:var(--primary,var(--accent,#38bdf8))!important;padding:0!important;margin:0!important;font:inherit!important;font-weight:700!important;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.mh-meta-action:hover{filter:brightness(1.2)}
+.mh-meta-backdrop{position:fixed;inset:0;z-index:2147483600;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,23,.78)}
+.mh-meta-backdrop[hidden]{display:none!important}
+.mh-meta-dialog{width:min(100%,650px);max-height:min(82vh,760px);overflow:auto;padding:24px;border:1px solid #334155;border-radius:16px;background:#111827;color:#e5e7eb;box-shadow:0 24px 70px rgba(0,0,0,.48);font:14px/1.6 Inter,"Segoe UI",Arial,sans-serif}
+.mh-meta-dialog:focus{outline:none}
+.mh-meta-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}
+.mh-meta-dialog h2{margin:0;color:#38bdf8;font-size:21px;line-height:1.3}
+.mh-meta-dialog h3{margin:0 0 6px;color:#e2e8f0;font-size:15px}
+.mh-meta-intro{margin:8px 0 16px;color:#cbd5e1;font-size:14px;line-height:1.65}
+.mh-meta-close{flex:0 0 auto;appearance:none;border:1px solid #475569!important;border-radius:9px!important;background:#1e293b!important;color:#f8fafc!important;padding:5px 10px!important;font-size:20px!important;line-height:1.2;cursor:pointer}
+.mh-meta-close:hover{background:#334155!important}
+.mh-meta-section{margin-top:13px;padding:15px 16px;border:1px solid #334155;border-left:3px solid #38bdf8;border-radius:10px;background:#0f172a}
+.mh-meta-section ul{margin:7px 0 0;padding-left:20px;color:#cbd5e1;line-height:1.7}
+.mh-meta-section li+li{margin-top:4px}
+.mh-meta-date{margin:3px 0 9px;color:#94a3b8;font-size:12px}
+@media(max-width:600px){.mh-meta-dialog{padding:18px}.mh-meta-footer{margin-top:18px}}
 
-  
+body.mh-meta-modal-open{overflow:hidden}
+</style>
+<footer class="mh-meta-footer">
+  <div class="mh-meta-credit">Created by Mahendran Selvaraj</div>
+  <div class="mh-meta-links">
+    <button type="button" class="mh-meta-action" id="mhOpenInfo" aria-haspopup="dialog" aria-controls="mhInfoModal">Info</button>
+    <span class="mh-meta-sep" aria-hidden="true">|</span>
+    <span>Version 1.2</span>
+    <span class="mh-meta-sep" aria-hidden="true">|</span>
+    <button type="button" class="mh-meta-action" id="mhOpenPatch" aria-haspopup="dialog" aria-controls="mhPatchModal">Patch Notes</button>
+  </div>
+</footer>
+<div class="mh-meta-backdrop" id="mhInfoModal" hidden>
+  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhInfoTitle" aria-describedby="mhInfoIntro" tabindex="-1">
+    <div class="mh-meta-dialog-header"><h2 id="mhInfoTitle">Batch Stock Lookup — How to Use</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close information">×</button></div>
+    <p class="mh-meta-intro" id="mhInfoIntro">Check multiple product codes in one run, review stock quantities and vintage changes, and export the results. Vintage controls cover the current year, the previous five years and the next five years, with manual vintage entry also available.</p>
+    <article class="mh-meta-section"><h3>Run a stock check</h3><ul><li>Paste product codes into the input box, one code per line.</li><li>Choose the required stock threshold or keep the default setting.</li><li>Select Fetch Stock Info to process the pasted product codes.</li></ul></article><article class="mh-meta-section"><h3>Review and export</h3><ul><li>Review the Valid Stock Quantity, Vintage Changed, Invalid / Remarks and other result sections.</li><li>Select Auto Vintage Checker once to test the current year, the previous five years and the next five years for every remaining invalid product. The tool stops checking an item when it finds a usable vintage.</li><li>To check another vintage, enter a four-digit year (for example 2026) or a two-digit vintage (for example 26) in Manual Vintage, then select Check Vintage. You can also press Enter.</li><li>Use Default Vintage to restore the original product-code list and run the standard stock check again.</li><li>Use Clear Cache when you need to remove cached lookup data, and Export to Excel to save the results.</li></ul></article>
+  </section>
+</div>
+<div class="mh-meta-backdrop" id="mhPatchModal" hidden>
+  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhPatchTitle" aria-describedby="mhPatchIntro" tabindex="-1">
+    <div class="mh-meta-dialog-header"><h2 id="mhPatchTitle">Patch Notes &amp; History</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close patch notes">×</button></div>
+    <p class="mh-meta-intro" id="mhPatchIntro">Version history and interface updates for Batch Stock Lookup — How to Use.</p>
+    <article class="mh-meta-section">
+      <h3>Version 1.2 — One-Click Auto Vintage Checker</h3>
+      <div class="mh-meta-date">19 November 2026</div>
+      <ul>
+        <li>Replaced the individual year buttons with one Auto Vintage Checker button.</li><li>The checker tests the current year, five previous years and five future years for each remaining invalid product, stopping when it finds a usable vintage.</li>
+        <li>Added manual vintage entry, accepting a four-digit year or a one- or two-digit vintage suffix.</li>
+        <li>Added Default Vintage to restore the original product-code list and rerun the default stock check.</li>
+      </ul>
+    </article>
+    <article class="mh-meta-section">
+      <h3>Version 1.0 — Tool information panel</h3>
+      <div class="mh-meta-date">19 November 2026</div>
+      <ul>
+        <li>Added the Created by Mahendran Selvaraj credit and a consistent version display.</li>
+        <li>Added this Info guide with instructions for the tool's existing features.</li>
+        <li>Added a clickable Patch Notes history panel.</li>
+        <li>Kept the existing tool workflow and functionality intact.</li>
+      </ul>
+    </article>
+  </section>
+</div>
+<script id="mh-meta-panel-script">
+(function () {
+  const infoModal = document.getElementById('mhInfoModal');
+  const patchModal = document.getElementById('mhPatchModal');
+  const openInfo = document.getElementById('mhOpenInfo');
+  const openPatch = document.getElementById('mhOpenPatch');
+  if (!infoModal || !patchModal || !openInfo || !openPatch) return;
+  let activeModal = null;
+  let previousFocus = null;
+  function openModal(modal) {
+    if (activeModal) closeModal(activeModal, false);
+    previousFocus = document.activeElement;
+    activeModal = modal;
+    modal.hidden = false;
+    document.body.classList.add('mh-meta-modal-open');
+    modal.querySelector('.mh-meta-dialog').focus();
+  }
+  function closeModal(modal, restoreFocus = true) {
+    modal.hidden = true;
+    activeModal = null;
+    document.body.classList.remove('mh-meta-modal-open');
+    if (restoreFocus && previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+  }
+  openInfo.addEventListener('click', () => openModal(infoModal));
+  openPatch.addEventListener('click', () => openModal(patchModal));
+  [infoModal, patchModal].forEach(modal => {
+    modal.addEventListener('click', event => {
+      if (event.target === modal || event.target.closest('[data-mh-close]')) closeModal(modal);
+    });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && activeModal) closeModal(activeModal);
+  });
+})();
+</script>
 
-  <script>
+  <script src="../../assets/maksoft-tool.js?v=3"></script>
+</main>
+</div>
+<script>
 
   let startTime = null;
 
@@ -814,133 +600,8 @@
     if (event.key === "Enter") checkManualVintage();
   });
   </script>
-  <script>
- const themeSwitch = document.getElementById("themeSwitch");
-    function setTheme(mode) {
-      if (mode === "light") {
-        document.body.classList.add("light-mode");
-        themeSwitch.checked = true;
-      } else {
-        document.body.classList.remove("light-mode");
-        themeSwitch.checked = false;
-      }
-      localStorage.setItem("theme", mode);
-    }
-
-    themeSwitch.addEventListener("change", () => {
-      setTheme(themeSwitch.checked ? "light" : "dark");
-    });
-
-    // Load saved theme
-    (function() {
-      const saved = localStorage.getItem("theme") || "dark";
-      setTheme(saved);
-    })();
+<script>
+const themeSwitch = document.getElementById("themeSwitch");
 </script>
-
-
-<style id="mh-meta-panels">
-.mh-meta-footer{max-width:1400px;margin:24px auto 8px;padding:16px 10px;border-top:1px solid rgba(148,163,184,.32);color:var(--muted,#94a3b8);text-align:center;font-family:inherit;font-size:13px;line-height:1.8;position:relative;z-index:5}
-.mh-meta-credit{color:var(--text,currentColor);font-weight:750}
-.mh-meta-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px}
-.mh-meta-sep{color:#94a3b8;opacity:.7}
-.mh-meta-action{appearance:none;border:0!important;background:transparent!important;color:var(--primary,var(--accent,#38bdf8))!important;padding:0!important;margin:0!important;font:inherit!important;font-weight:700!important;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.mh-meta-action:hover{filter:brightness(1.2)}
-.mh-meta-backdrop{position:fixed;inset:0;z-index:2147483600;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,23,.78)}
-.mh-meta-backdrop[hidden]{display:none!important}
-.mh-meta-dialog{width:min(100%,650px);max-height:min(82vh,760px);overflow:auto;padding:24px;border:1px solid #334155;border-radius:16px;background:#111827;color:#e5e7eb;box-shadow:0 24px 70px rgba(0,0,0,.48);font:14px/1.6 Inter,"Segoe UI",Arial,sans-serif}
-.mh-meta-dialog:focus{outline:none}
-.mh-meta-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}
-.mh-meta-dialog h2{margin:0;color:#38bdf8;font-size:21px;line-height:1.3}
-.mh-meta-dialog h3{margin:0 0 6px;color:#e2e8f0;font-size:15px}
-.mh-meta-intro{margin:8px 0 16px;color:#cbd5e1;font-size:14px;line-height:1.65}
-.mh-meta-close{flex:0 0 auto;appearance:none;border:1px solid #475569!important;border-radius:9px!important;background:#1e293b!important;color:#f8fafc!important;padding:5px 10px!important;font-size:20px!important;line-height:1.2;cursor:pointer}
-.mh-meta-close:hover{background:#334155!important}
-.mh-meta-section{margin-top:13px;padding:15px 16px;border:1px solid #334155;border-left:3px solid #38bdf8;border-radius:10px;background:#0f172a}
-.mh-meta-section ul{margin:7px 0 0;padding-left:20px;color:#cbd5e1;line-height:1.7}
-.mh-meta-section li+li{margin-top:4px}
-.mh-meta-date{margin:3px 0 9px;color:#94a3b8;font-size:12px}
-@media(max-width:600px){.mh-meta-dialog{padding:18px}.mh-meta-footer{margin-top:18px}}
-
-body.mh-meta-modal-open{overflow:hidden}
-</style>
-<footer class="mh-meta-footer">
-  <div class="mh-meta-credit">Created by Mahendran Selvaraj</div>
-  <div class="mh-meta-links">
-    <button type="button" class="mh-meta-action" id="mhOpenInfo" aria-haspopup="dialog" aria-controls="mhInfoModal">Info</button>
-    <span class="mh-meta-sep" aria-hidden="true">|</span>
-    <span>Version 1.2</span>
-    <span class="mh-meta-sep" aria-hidden="true">|</span>
-    <button type="button" class="mh-meta-action" id="mhOpenPatch" aria-haspopup="dialog" aria-controls="mhPatchModal">Patch Notes</button>
-  </div>
-</footer>
-<div class="mh-meta-backdrop" id="mhInfoModal" hidden>
-  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhInfoTitle" aria-describedby="mhInfoIntro" tabindex="-1">
-    <div class="mh-meta-dialog-header"><h2 id="mhInfoTitle">Batch Stock Lookup — How to Use</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close information">×</button></div>
-    <p class="mh-meta-intro" id="mhInfoIntro">Check multiple product codes in one run, review stock quantities and vintage changes, and export the results. Vintage controls cover the current year, the previous five years and the next five years, with manual vintage entry also available.</p>
-    <article class="mh-meta-section"><h3>Run a stock check</h3><ul><li>Paste product codes into the input box, one code per line.</li><li>Choose the required stock threshold or keep the default setting.</li><li>Select Fetch Stock Info to process the pasted product codes.</li></ul></article><article class="mh-meta-section"><h3>Review and export</h3><ul><li>Review the Valid Stock Quantity, Vintage Changed, Invalid / Remarks and other result sections.</li><li>Select Auto Vintage Checker once to test the current year, the previous five years and the next five years for every remaining invalid product. The tool stops checking an item when it finds a usable vintage.</li><li>To check another vintage, enter a four-digit year (for example 2026) or a two-digit vintage (for example 26) in Manual Vintage, then select Check Vintage. You can also press Enter.</li><li>Use Default Vintage to restore the original product-code list and run the standard stock check again.</li><li>Use Clear Cache when you need to remove cached lookup data, and Export to Excel to save the results.</li></ul></article>
-  </section>
-</div>
-<div class="mh-meta-backdrop" id="mhPatchModal" hidden>
-  <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhPatchTitle" aria-describedby="mhPatchIntro" tabindex="-1">
-    <div class="mh-meta-dialog-header"><h2 id="mhPatchTitle">Patch Notes &amp; History</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close patch notes">×</button></div>
-    <p class="mh-meta-intro" id="mhPatchIntro">Version history and interface updates for Batch Stock Lookup — How to Use.</p>
-    <article class="mh-meta-section">
-      <h3>Version 1.2 — One-Click Auto Vintage Checker</h3>
-      <div class="mh-meta-date">19 November 2026</div>
-      <ul>
-        <li>Replaced the individual year buttons with one Auto Vintage Checker button.</li><li>The checker tests the current year, five previous years and five future years for each remaining invalid product, stopping when it finds a usable vintage.</li>
-        <li>Added manual vintage entry, accepting a four-digit year or a one- or two-digit vintage suffix.</li>
-        <li>Added Default Vintage to restore the original product-code list and rerun the default stock check.</li>
-      </ul>
-    </article>
-    <article class="mh-meta-section">
-      <h3>Version 1.0 — Tool information panel</h3>
-      <div class="mh-meta-date">19 November 2026</div>
-      <ul>
-        <li>Added the Created by Mahendran Selvaraj credit and a consistent version display.</li>
-        <li>Added this Info guide with instructions for the tool's existing features.</li>
-        <li>Added a clickable Patch Notes history panel.</li>
-        <li>Kept the existing tool workflow and functionality intact.</li>
-      </ul>
-    </article>
-  </section>
-</div>
-<script id="mh-meta-panel-script">
-(function () {
-  const infoModal = document.getElementById('mhInfoModal');
-  const patchModal = document.getElementById('mhPatchModal');
-  const openInfo = document.getElementById('mhOpenInfo');
-  const openPatch = document.getElementById('mhOpenPatch');
-  if (!infoModal || !patchModal || !openInfo || !openPatch) return;
-  let activeModal = null;
-  let previousFocus = null;
-  function openModal(modal) {
-    if (activeModal) closeModal(activeModal, false);
-    previousFocus = document.activeElement;
-    activeModal = modal;
-    modal.hidden = false;
-    document.body.classList.add('mh-meta-modal-open');
-    modal.querySelector('.mh-meta-dialog').focus();
-  }
-  function closeModal(modal, restoreFocus = true) {
-    modal.hidden = true;
-    activeModal = null;
-    document.body.classList.remove('mh-meta-modal-open');
-    if (restoreFocus && previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
-  }
-  openInfo.addEventListener('click', () => openModal(infoModal));
-  openPatch.addEventListener('click', () => openModal(patchModal));
-  [infoModal, patchModal].forEach(modal => {
-    modal.addEventListener('click', event => {
-      if (event.target === modal || event.target.closest('[data-mh-close]')) closeModal(modal);
-    });
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && activeModal) closeModal(activeModal);
-  });
-})();
-</script>
-<script src="../../assets/maksoft-tool.js?v=3"></script>
 </body>
 </html>
