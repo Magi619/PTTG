@@ -1,15 +1,35 @@
-(()=>{document.querySelectorAll('a.html-tools-hub-link').forEach(a=>a.remove());const body=document.body;body.classList.add('mk-tool-body');const title=(document.title||'Tool').split('—')[0].split('|')[0].trim();const header=document.createElement('header');header.className='mk-header';header.innerHTML='<div class="mk-header-inner"><a class="mk-brand" href="../../index.html" aria-label="Maksoft home"><span class="mk-brand-mark">m</span><span>maksoft</span></a><span class="mk-nav-meta">YOUR WORKSPACE &nbsp; / &nbsp; '+title.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</span><a class="mk-nav-back" href="../../index.html">← All tools</a></div>';if(!document.querySelector('.mk-header'))body.insertBefore(header,body.firstChild);
-const has=id=>!!document.getElementById(id);
-if(has('canvas')&&document.querySelector('.controls')){body.classList.add('mk-page-frame-tool');const canvas=document.getElementById('canvas'),oldStage=canvas.parentElement,oldControls=document.querySelector('.controls'),h2=oldStage.querySelector('h2');const page=document.createElement('main');page.className='mk-tool-page mk-frame-page';const intro=document.createElement('section');intro.className='mk-tool-heading';intro.innerHTML='<div class="mk-tool-eyebrow">CREATIVE UTILITIES</div><h1>Frame Studio</h1><p>Give your images a clean edge. Choose a colour, build a gradient and export a polished PNG.</p>';const layout=document.createElement('div');layout.className='mk-frame-workspace';const stage=document.createElement('section');stage.className='mk-frame-preview-panel';stage.innerHTML='<div class="mk-frame-panel-head"><span>LIVE PREVIEW</span><span class="mk-preview-size">1280 × 720</span></div>';const canvasWrap=document.createElement('div');canvasWrap.className='mk-frame-canvas-wrap';if(h2)h2.remove();canvasWrap.appendChild(canvas);stage.appendChild(canvasWrap);const controls=document.createElement('aside');controls.className='mk-frame-controls';const controlTitle=document.createElement('div');controlTitle.className='mk-control-heading';controlTitle.innerHTML='<span>DESIGN CONTROLS</span><strong>Make it yours.</strong><p>Adjust the frame appearance and save your image.</p>';controls.appendChild(controlTitle);const file=document.createElement('section');file.className='mk-control-section';file.innerHTML='<div class="mk-control-label">01 / YOUR IMAGE</div><label class="mk-file-label"><span>Choose an image</span><small>JPG, PNG or WebP</small></label>';const fileInput=oldControls.querySelector('input[type=file]');file.querySelector('label').appendChild(fileInput);controls.appendChild(file);const color=document.createElement('section');color.className='mk-control-section';color.innerHTML='<div class="mk-control-label">02 / FRAME COLOUR</div><label class="mk-color-label"><span>Solid colour</span></label>';const colorPicker=oldControls.querySelector('#colorPicker');color.querySelector('.mk-color-label').appendChild(colorPicker);const palette=oldControls.querySelector('.color-btn')?.parentElement;if(palette){palette.classList.add('mk-color-palette');color.appendChild(palette)}controls.appendChild(color);const gradient=document.createElement('section');gradient.className='mk-control-section';gradient.innerHTML='<div class="mk-control-label">03 / GRADIENT</div><div class="mk-gradient-colors"></div><div class="mk-gradient-actions"></div>';const colorInputs=[...oldControls.querySelectorAll('input[type=color]')].filter(x=>x.id!=='colorPicker');colorInputs.forEach((input,i)=>{const label=document.createElement('label');label.className='mk-gradient-color';label.innerHTML='<span>Colour '+(i+1)+'</span>';label.appendChild(input);gradient.querySelector('.mk-gradient-colors').appendChild(label)});[...oldControls.querySelectorAll('button:not(.color-btn):not(.download)')].forEach(btn=>{btn.classList.add('mk-secondary-button');gradient.querySelector('.mk-gradient-actions').appendChild(btn)});controls.appendChild(gradient);const download=oldControls.querySelector('button.download');if(download){download.classList.add('mk-download-button');controls.appendChild(download)}layout.append(stage,controls);page.append(intro,layout);header.after(page);oldStage.remove();oldControls.remove();}
-else if(has('productList'))body.classList.add('mk-page-batch-stock');
-else if(has('inp-title')&&document.querySelector('.wrap'))body.classList.add('mk-page-event');
-else if(has('excelTable'))body.classList.add('mk-page-akamai');
-else if(has('fileInput')&&has('resultTable'))body.classList.add('mk-page-monthly');
-else if(has('pdfFile'))body.classList.add('mk-page-order');
-else if(has('work-canvas'))body.classList.add('mk-page-image-editor');
-else if(has('codeInput'))body.classList.add('mk-page-gift');
-else if(has('editor'))body.classList.add('mk-page-mini');
-else if(has('inputsPanel'))body.classList.add('mk-page-landing');
-else if(document.querySelector('main .connection-state'))body.classList.add('mk-page-inzone');
-else if(has('zoom-slider')&&has('canvas'))body.classList.add('mk-page-frame-tool');
+(() => {
+  const body = document.body;
+  if (!body) return;
+
+  // Identify the existing tool without rebuilding or moving any of its elements.
+  let tool = "unknown";
+  const has = id => !!document.getElementById(id);
+
+  if (has("productList")) tool = "stock";
+  else if (has("inp-title") && document.querySelector(".wrap")) tool = "event";
+  else if (has("excelTable")) tool = "akamai";
+  else if (has("resultTable")) tool = "monthly";
+  else if (has("pdfFile")) tool = "pageturner";
+  else if (has("work-canvas")) tool = "photoshop";
+  else if (has("codeInput")) tool = "gift";
+  else if (has("editor")) tool = "mini";
+  else if (has("inputsPanel")) tool = "landing";
+  else if (has("colorPicker") && has("canvas")) tool = "frame";
+  else if (document.querySelector(".connection-state")) tool = "inzone";
+
+  body.setAttribute("data-maksoft-tool", tool);
+
+  // Keep the original floating navigation link in its original position.
+  const homeLink = document.querySelector("a.html-tools-hub-link");
+  if (homeLink) {
+    homeLink.href = "../../index.html";
+    homeLink.title = "Back to Maksoft";
+    homeLink.setAttribute("aria-label", "Back to Maksoft");
+    const spans = homeLink.querySelectorAll("span");
+    if (spans.length) spans[spans.length - 1].textContent = "Maksoft";
+  }
+
+  // Remove only a stale injected header from an earlier cached version.
+  document.querySelectorAll(".mk-header").forEach(node => node.remove());
 })();
