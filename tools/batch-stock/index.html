@@ -35,7 +35,21 @@ button,input,textarea{font:inherit}
 #stockThresholdInput{display:none;width:76px;padding:5px 7px;border:1px solid #4a5365;border-radius:5px;background:#171b26;color:#fff}
 .side-divider{height:1px;background:var(--side-line);margin:4px 0}
 .side-section-label{font-size:10px;font-weight:700;letter-spacing:1px;color:#aeb5c4;margin-bottom:2px}
-.vintage-controls{display:flex;flex-direction:column;gap:9px}
+.vintage-rules{display:flex;flex-direction:column;gap:8px;padding:2px 0 0}
+.vintage-option{display:flex;align-items:center;gap:9px;min-height:23px;padding:3px 7px;border-radius:5px;color:#e5e7eb;font-size:12px;cursor:pointer;transition:background .15s,color .15s}
+.vintage-option:hover{background:rgba(255,255,255,.07)}
+.vintage-option:has(input:checked){background:#303d68;color:#f4c45d;font-weight:700}
+.vintage-option input{width:13px;height:13px;margin:0;accent-color:var(--gold);cursor:pointer}
+.advanced-vintage{margin-top:4px;padding-top:10px;border-top:1px solid var(--side-line);color:#cbd5e1;font-size:11px}
+.advanced-vintage summary{cursor:pointer;color:#aeb5c4;font-weight:650;list-style:none}
+.advanced-vintage summary::-webkit-details-marker{display:none}
+.advanced-vintage summary:after{content:"＋";float:right;color:var(--gold)}
+.advanced-vintage[open] summary:after{content:"−"}
+.vintage-controls{display:flex;flex-direction:column;gap:9px;padding-top:12px}
+.vintage-controls>button{min-height:32px;padding:7px 9px;border:1px solid #41495b;border-radius:6px;background:#d7aa50;color:#161616;font-size:11px;font-weight:700;cursor:pointer}
+.manual-vintage-row{display:flex;gap:7px}
+.manual-vintage-row input{min-width:0;flex:1;padding:8px;border:1px solid #424b5d;border-radius:6px;background:#171b26;color:#fff}
+.manual-vintage-row button{padding:7px 10px;border:1px solid #41495b;border-radius:6px;background:#252b39;color:#f4f6fa;font-size:11px;cursor:pointer}
 .vintage-controls-top,.vintage-manual{display:flex;flex-wrap:wrap;gap:7px}
 .vintage-controls-top button,.vintage-manual button{min-height:32px;padding:7px 9px;border:1px solid #41495b;border-radius:6px;background:#252b39;color:#f4f6fa;font-size:11px;cursor:pointer}
 .vintage-controls-top button:hover,.vintage-manual button:hover{border-color:var(--gold)}
@@ -86,6 +100,8 @@ tbody tr:nth-child(even){background:#fafbfc}
 @media(max-width:1050px){.app-shell{grid-template-columns:280px minmax(0,1fr)}.sidebar{padding:22px 18px}.workspace{padding:18px}.results-grid{grid-template-rows:minmax(250px,1fr) minmax(250px,1fr)}}
 @media(max-width:760px){.app-shell{grid-template-columns:1fr}.sidebar{position:relative;height:auto;max-height:none;padding:20px;gap:14px}.input-wrap{margin-top:0}#productList{height:110px}.hub-link{margin-top:0}.workspace{padding:16px}.results-grid{grid-template-columns:1fr;grid-template-rows:auto}.result-card{min-height:230px}.topbar{align-items:flex-start}.workflow{font-size:10px}}
 @media(max-width:420px){.workspace{padding:12px}.topbar{flex-direction:column;gap:6px}.side-actions{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:761px){.sidebar{gap:19px}.workspace{padding:16px 24px 22px}.page-heading{font-size:16px}.summary-strip{min-height:34px}}
+@media(max-width:760px){.vintage-rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.vintage-option{padding:6px}.advanced-vintage{margin-top:2px}}
 </style>
 </head>
 <body>
@@ -107,20 +123,28 @@ tbody tr:nth-child(even){background:#fafbfc}
   </div>
   <label class="threshold-row"><input type="checkbox" id="toggleThreshold" onchange="toggleThresholdInput()"> Custom min. stock <input type="number" id="stockThresholdInput" min="1" value="13" aria-label="Minimum stock threshold"></label>
   <div class="side-divider"></div>
-  <div class="side-section-label">VINTAGE CHECK</div>
-  <div class="vintage-controls">
-    <div class="vintage-controls-top">
-      <button type="button" onclick="restoreDefault()" title="Restore the original product-code list and run the default stock check">Default</button>
-      <button type="button" id="autoVintageBtn" onclick="autoCheckVintage()" title="Automatically test the previous five years, current year and next five years">Auto Vintage</button>
-    </div>
-    <span id="vintageRangeLabel" class="vintage-range-label">Auto range: loading...</span>
-    <div class="vintage-manual">
+  <div class="side-section-label">VINTAGE RULE</div>
+  <div class="vintage-rules" role="radiogroup" aria-label="Vintage rule">
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="default" onchange="applyVintageRule(this.value)"> <span>Default</span></label>
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="21" onchange="applyVintageRule(this.value)"> <span>V.21</span></label>
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="22" checked onchange="applyVintageRule(this.value)"> <span>V.22</span></label>
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="23" onchange="applyVintageRule(this.value)"> <span>V.23</span></label>
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="24" onchange="applyVintageRule(this.value)"> <span>V.24</span></label>
+    <label class="vintage-option"><input type="radio" name="vintageRule" value="25" onchange="applyVintageRule(this.value)"> <span>V.25</span></label>
+  </div>
+  <details class="advanced-vintage">
+    <summary>Advanced vintage tools</summary>
+    <div class="vintage-controls">
+      <button type="button" id="autoVintageBtn" onclick="autoCheckVintage()" title="Automatically test the previous five years, current year and next five years">Auto Vintage Checker</button>
+      <span id="vintageRangeLabel" class="vintage-range-label">Auto range: loading...</span>
       <label for="manualVintageInput">Manual vintage</label>
-      <input type="number" id="manualVintageInput" inputmode="numeric" min="0" max="2099" step="1" placeholder="e.g. 2026 or 26" aria-describedby="manualVintageHelp">
-      <button type="button" onclick="checkManualVintage()">Check Vintage</button>
+      <div class="manual-vintage-row">
+        <input type="number" id="manualVintageInput" inputmode="numeric" min="0" max="2099" step="1" placeholder="e.g. 2026 or 26" aria-describedby="manualVintageHelp">
+        <button type="button" onclick="checkManualVintage()">Check</button>
+      </div>
       <span id="manualVintageHelp" class="vintage-help">Enter a 4-digit year or 1–2 digit vintage code.</span>
     </div>
-  </div>
+  </details>
   <a class="hub-link" href="../../index.html"><span aria-hidden="true">←</span> My HTML Tools</a>
 </aside>
 <main class="workspace">
@@ -378,6 +402,14 @@ body.mh-meta-modal-open{overflow:hidden}
     window.resultsData = {valid:[], invalid:[], vintage:[], happy:[]};
 
     await fetchAll();
+  }
+
+  function applyVintageRule(value) {
+    if (value === "default") {
+      restoreDefault();
+      return;
+    }
+    fixInvalidWithDigit(value);
   }
 
   function normalizeVintageSuffix(value) {
