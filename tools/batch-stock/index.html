@@ -102,6 +102,18 @@ tbody tr:nth-child(even){background:#fafbfc}
 @media(max-width:420px){.workspace{padding:12px}.topbar{flex-direction:column;gap:6px}.side-actions{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:761px){.sidebar{gap:19px}.workspace{padding:16px 24px 22px}.page-heading{font-size:16px}.summary-strip{min-height:34px}}
 @media(max-width:760px){.vintage-rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.vintage-option{padding:6px}.advanced-vintage{margin-top:2px}}
+
+/* Maksoft Batch Stock Lookup — Legacy / Enhanced switcher */
+.mk-version-switcher{display:flex;align-items:center;gap:4px;padding:4px 5px;border:1px solid rgba(148,163,184,.32);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(21,31,54,.10);white-space:nowrap}
+.mk-version-label{padding:0 7px;color:#8993a4;font:800 9px/1 Inter,Arial,sans-serif;letter-spacing:.12em}
+.mk-version-link,.mk-version-link:visited{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:6px 12px;border:1px solid transparent;border-radius:999px;color:#566174!important;text-decoration:none!important;font:700 11px/1 Inter,Arial,sans-serif;transition:background .16s ease,color .16s ease}
+.mk-version-link:hover{background:#eef2f7;color:#263244!important}
+.mk-version-link.is-active{background:#202735;color:#fff!important;box-shadow:0 3px 8px rgba(26,35,52,.16)}
+.mk-version-link:focus-visible{outline:3px solid #77a9ec;outline-offset:2px}
+.mk-version-link small{font:800 8px/1 Inter,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.78}
+.mk-version-switcher.mk-version-floating{position:fixed;top:12px;right:14px;z-index:2147483100}
+@media(max-width:760px){.mk-version-label{display:none}.mk-version-link{padding:6px 10px}.mk-version-switcher.mk-version-floating{top:9px;right:9px}}
+
 </style>
 </head>
 <body>
@@ -151,6 +163,11 @@ tbody tr:nth-child(even){background:#fafbfc}
   <header class="topbar">
     <h1 class="page-heading">Batch Stock Lookup</h1>
     <div class="workflow"><span class="workflow-dot"></span> Workflow state</div>
+    <nav class="mk-version-switcher" aria-label="Batch Stock Lookup version">
+  <span class="mk-version-label">VERSION</span>
+  <a class="mk-version-link" href="legacy.html">Legacy</a>
+  <a class="mk-version-link is-active" href="index.html" aria-current="page">Enhanced <small>Current</small></a>
+</nav>
   </header>
   <div class="summary-strip"><span class="summary-check">✓</span><span>Ready to check product codes</span></div>
   <section class="results-grid" aria-label="Stock lookup results">
