@@ -240,16 +240,6 @@
 
 
   
-/* Maksoft Batch Stock Lookup — Legacy / Enhanced switcher */
-.mk-version-switcher{display:flex;align-items:center;gap:4px;padding:4px 5px;border:1px solid rgba(148,163,184,.32);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 5px 18px rgba(21,31,54,.10);white-space:nowrap}
-.mk-version-label{padding:0 7px;color:#8993a4;font:800 9px/1 Inter,Arial,sans-serif;letter-spacing:.12em}
-.mk-version-link,.mk-version-link:visited{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:6px 12px;border:1px solid transparent;border-radius:999px;color:#566174!important;text-decoration:none!important;font:700 11px/1 Inter,Arial,sans-serif;transition:background .16s ease,color .16s ease}
-.mk-version-link:hover{background:#eef2f7;color:#263244!important}
-.mk-version-link.is-active{background:#202735;color:#fff!important;box-shadow:0 3px 8px rgba(26,35,52,.16)}
-.mk-version-link:focus-visible{outline:3px solid #77a9ec;outline-offset:2px}
-.mk-version-link small{font:800 8px/1 Inter,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.78}
-.mk-version-switcher.mk-version-floating{position:fixed;top:12px;right:14px;z-index:2147483100}
-@media(max-width:760px){.mk-version-label{display:none}.mk-version-link{padding:6px 10px}.mk-version-switcher.mk-version-floating{top:9px;right:9px}}
 
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -304,15 +294,18 @@
   }
 </style>
 
-  <link rel="stylesheet" href="../../assets/maksoft-tool.css?v=4">
+  <link rel="stylesheet" href="../../assets/maksoft-tool.css?v=7">
+<style id="mk-version-footer-style">
+.mk-version-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:5px auto 17px;padding:0 10px;color:#9aa3b2;font:600 10px/1.35 "DM Sans",Inter,Arial,sans-serif}
+.mk-version-footer-label{margin-right:3px;color:#9aa3b2;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.mk-version-footer a,.mk-version-footer a:visited{display:inline-flex;align-items:center;justify-content:center;min-height:23px;padding:4px 10px;border:1px solid #e5e9ef;border-radius:999px;background:rgba(255,255,255,.88);color:#667085!important;text-decoration:none!important;font:700 10px/1 Inter,Arial,sans-serif;transition:background .16s ease,color .16s ease,border-color .16s ease}
+.mk-version-footer a:hover{background:#f1f4f8;border-color:#cbd5e1;color:#253247!important}
+.mk-version-footer a.is-active{background:#263244;border-color:#263244;color:#fff!important;box-shadow:0 2px 6px rgba(25,35,52,.12)}
+.mk-version-footer a:focus-visible{outline:2px solid #6da4ed;outline-offset:2px}
+@media(max-width:600px){.mk-version-footer{margin-bottom:14px}.mk-version-footer-label{font-size:8px}}
+</style>
 </head>
 <body>
-<nav class="mk-version-switcher mk-version-floating" aria-label="Batch Stock Lookup version">
-  <span class="mk-version-label">VERSION</span>
-  <a class="mk-version-link is-active" href="legacy.html" aria-current="page">Legacy</a>
-  <a class="mk-version-link" href="index.html">Enhanced</a>
-</nav>
-
 <a class="html-tools-hub-link" href="../../index.html" title="Back to My HTML Tools" aria-label="Back to My HTML Tools"><span class="hub-arrow" aria-hidden="true">←</span><span>My HTML Tools</span></a>
 
   
@@ -708,6 +701,8 @@ body.mh-meta-modal-open{overflow:hidden}
     <button type="button" class="mh-meta-action" id="mhOpenPatch" aria-haspopup="dialog" aria-controls="mhPatchModal">Patch Notes</button>
   </div>
 </footer>
+<nav class="mk-version-footer" aria-label="Choose tool version"><span class="mk-version-footer-label">Version</span><a href="legacy.html" class="is-active" aria-current="page">Legacy</a><a href="index.html">Enhanced</a></nav>
+
 <div class="mh-meta-backdrop" id="mhInfoModal" hidden>
   <section class="mh-meta-dialog" role="dialog" aria-modal="true" aria-labelledby="mhInfoTitle" aria-describedby="mhInfoIntro" tabindex="-1">
     <div class="mh-meta-dialog-header"><h2 id="mhInfoTitle">Batch Stock Lookup — How to Use</h2><button type="button" class="mh-meta-close" data-mh-close aria-label="Close information">×</button></div>
@@ -766,6 +761,6 @@ body.mh-meta-modal-open{overflow:hidden}
   });
 })();
 </script>
-  <script src="../../assets/maksoft-tool.js?v=4"></script>
+  <script src="../../assets/maksoft-tool.js?v=7"></script>
 </body>
 </html>
