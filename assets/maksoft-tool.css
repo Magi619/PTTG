@@ -611,4 +611,104 @@ body[data-maksoft-tool="landing"].dark .html-tools-hub-link:hover {
   background: #33445a !important;
   color: #ffffff !important;
   border-color: #5c7695 !important;
+}/* Maksoft footer placement and contrast refinement */
+body[data-maksoft-tool] .mh-meta-credit{font-weight:700!important;letter-spacing:.1px!important}
+body[data-maksoft-tool] .mh-meta-links{gap:9px!important}
+body[data-maksoft-tool="frame"] .mh-meta-footer,
+body[data-maksoft-tool="landing"] .mh-meta-footer,
+body[data-maksoft-tool="photoshop"] .mh-meta-footer{
+  position:fixed!important;
+  left:50%!important;
+  bottom:10px!important;
+  transform:translateX(-50%)!important;
+  z-index:2147483000!important;
+  width:max-content!important;
+  max-width:calc(100vw - 28px)!important;
+  margin:0!important;
+  padding:8px 15px!important;
+  border:1px solid #43536a!important;
+  border-radius:999px!important;
+  background:rgba(24,33,46,.95)!important;
+  color:#c9d5e3!important;
+  text-align:center!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.22)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+body[data-maksoft-tool="frame"] .mh-meta-credit,
+body[data-maksoft-tool="landing"].dark .mh-meta-credit,
+body[data-maksoft-tool="photoshop"] .mh-meta-credit{
+  color:#f0f4f8!important;
+}
+body[data-maksoft-tool="frame"] .mh-meta-footer .mh-meta-action,
+body[data-maksoft-tool="landing"].dark .mh-meta-footer .mh-meta-action,
+body[data-maksoft-tool="photoshop"] .mh-meta-footer .mh-meta-action{
+  color:#8bc8ff!important;
+}
+body[data-maksoft-tool="frame"] .mh-meta-footer .mh-meta-sep,
+body[data-maksoft-tool="landing"].dark .mh-meta-footer .mh-meta-sep,
+body[data-maksoft-tool="photoshop"] .mh-meta-footer .mh-meta-sep{color:#7e8da0!important}
+
+/* Match each tool's footer text contrast to its active colour scheme. */
+body[data-maksoft-tool="akamai"] .app-footer,
+body[data-maksoft-tool="pageturner"] .mh-meta-footer,
+body[data-maksoft-tool="photoshop"] .mh-meta-footer,
+body[data-maksoft-tool="inzone"] .mh-meta-footer,
+body[data-maksoft-tool="frame"] .mh-meta-footer,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-footer,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-footer,
+body[data-maksoft-tool="landing"].dark .mh-meta-footer{
+  color:#c6d2df!important;
+  border-top-color:#3b4a5d!important;
+}
+body[data-maksoft-tool="akamai"] .footer-credit,
+body[data-maksoft-tool="pageturner"] .mh-meta-credit,
+body[data-maksoft-tool="photoshop"] .mh-meta-credit,
+body[data-maksoft-tool="inzone"] .mh-meta-credit,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-credit,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-credit,
+body[data-maksoft-tool="landing"].dark .mh-meta-credit{color:#f0f4f8!important}
+body[data-maksoft-tool="akamai"] .patch-notes-trigger,
+body[data-maksoft-tool="pageturner"] .mh-meta-action,
+body[data-maksoft-tool="photoshop"] .mh-meta-action,
+body[data-maksoft-tool="inzone"] .mh-meta-action,
+body[data-maksoft-tool="stock"]:not(.light-mode) .mh-meta-action,
+body[data-maksoft-tool="mini"].dark-mode .mh-meta-action,
+body[data-maksoft-tool="landing"].dark .mh-meta-action{color:#8bc8ff!important}
+
+/* Frame Tool controls: preserve their original positions and dimensions, improve colour only. */
+body[data-maksoft-tool="frame"] .controls h4{color:#e8eef6!important}
+body[data-maksoft-tool="frame"] .controls button:not(.color-btn):not(.download){
+  background-color:#29384b!important;
+  color:#edf3f9!important;
+  border:1px solid #43566e!important;
+}
+body[data-maksoft-tool="frame"] .controls button:not(.color-btn):not(.download):hover{
+  background-color:#354a62!important;
+  border-color:#5a7898!important;
+}
+body[data-maksoft-tool="frame"] .controls button.download{
+  background-color:#37bfd2!important;
+  color:#10282d!important;
+  border-color:#37bfd2!important;
+}
+body[data-maksoft-tool="frame"] input[type="file"]::file-selector-button{
+  background-color:#29384b!important;
+  color:#eef4fa!important;
+  border:1px solid #43566e!important;
+  border-radius:6px!important;
+}
+body[data-maksoft-tool="frame"] input[type="color"]{
+  background-color:#29384b!important;
+  border:1px solid #43566e!important;
+  border-radius:7px!important;
+}
+@media(max-width:600px){
+  body[data-maksoft-tool="frame"] .mh-meta-footer,
+  body[data-maksoft-tool="landing"] .mh-meta-footer,
+  body[data-maksoft-tool="photoshop"] .mh-meta-footer{
+    bottom:6px!important;
+    padding:6px 10px!important;
+    font-size:10px!important;
+  }
 }
