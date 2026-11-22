@@ -152,7 +152,7 @@
           <h3>Your cooler screen.<br>Make it yours.</h3>
           <p>A focused native Windows utility for the Thermalright Burst Assassin 120 Vision USB LCD. Choose a favourite image or animated GIF, adjust its fit and orientation, preview it, then send it directly to the cooler over USB HID.</p>
           <div class="app-actions">
-            <a class="app-button" href="https://github.com/Magi619/Thermalright-Mini-Display/releases" target="_blank" rel="noopener">Download for Windows <span>↗</span></a>
+            <a class="app-button" href="https://raw.githubusercontent.com/Magi619/Thermalright-Mini-Display/main/ThermalrightMiniDisplay.exe" target="_blank" rel="noopener">Download for Windows <span>↗</span></a>
             <a class="app-button secondary" href="https://github.com/Magi619/Thermalright-Mini-Display" target="_blank" rel="noopener">View source on GitHub <span>↗</span></a>
           </div>
           <div class="app-points">
@@ -179,18 +179,22 @@
             </ul>
           </div>
           <div>
-            <h4>How it compares with broader cooler software</h4>
+            <h4>How it compares with other display software</h4>
             <table class="app-comparison">
-              <thead><tr><th>Area</th><th>Thermalright Mini Display</th><th>Typical all-in-one cooler suite</th></tr></thead>
+              <thead><tr><th>Area</th><th>Mini Display v3.0.8</th><th>Thermalright TRCC V2</th><th>AIDA64 SensorPanel</th></tr></thead>
               <tbody>
-                <tr><td>Main purpose</td><td>Images and GIFs on the supported cooler LCD</td><td>Often combines display controls with monitoring and tuning</td></tr>
-                <tr><td>CPU / RAM / GPU stats</td><td>Not included — deliberately focused</td><td>May include monitoring panels, depending on the product</td></tr>
-                <tr><td>Fan curves / RGB</td><td>Not included</td><td>May be included when supported by the hardware</td></tr>
-                <tr><td>Image control</td><td>Still image, GIF, scaling, rotation and frame-rate cap</td><td>Varies by vendor and device</td></tr>
-                <tr><td>Runtime approach</td><td>Native C++ / Win32; no .NET runtime dependency</td><td>Varies; some suites install background services and extra modules</td></tr>
+                <tr><td>Main purpose</td><td>Simple image and GIF playback on the BA120 Vision LCD</td><td>Official Thermalright LCD control suite with themes and monitoring features</td><td>Configurable hardware sensor dashboards for supported external displays</td></tr>
+                <tr><td>BA120 Vision</td><td>Target device: BA120 Vision, USB VID 0416 / PID 5302</td><td>Listed by Thermalright as a compatible model</td><td>BA120-specific support is not listed in its published display compatibility list</td></tr>
+                <tr><td>CPU / GPU stats</td><td>Not included — media-focused by design</td><td>Offers CPU/GPU temperatures, usage and clock-speed information</td><td>Designed to show available hardware sensor values on supported displays</td></tr>
+                <tr><td>RAM stats</td><td>Not included</td><td>Check the fields available for your device and TRCC version; not assumed here</td><td>SensorPanel can display available hardware sensor items</td></tr>
+                <tr><td>Media &amp; customisation</td><td>Still images, GIF, scaling, rotation and GIF frame-rate cap</td><td>Themes, images, GIF/video and additional display customisation</td><td>Flexible layouts combining sensor values and visual elements</td></tr>
+                <tr><td>Runtime / scope</td><td>Native C++ / Win32; no .NET runtime dependency; narrow feature set</td><td>Official, broader-featured Thermalright software</td><td>Full hardware-monitoring suite with external display support</td></tr>
               </tbody>
             </table>
-            <div class="app-note"><strong>Performance note:</strong> The repository reports approximately 8.7 MB memory use, a 0.0% static-image CPU sample and 0.4–0.6% while playing GIFs in one user test. These are observations from one machine and measurement window, not guaranteed results. GIF playback and periodic static-image keep-alive transfers still require work.</div>
+            <div class="app-note"><strong>Where this app wins:</strong> Its deliberately small scope, native executable and low observed resource footprint. <strong>Where TRCC wins:</strong> It is the official BA120-compatible option and offers richer display customisation plus CPU/GPU information. Choose TRCC when you need live telemetry; choose Mini Display when you want a straightforward image/GIF player and prefer a focused utility.</div>
+            <div class="app-note"><strong>Performance note:</strong> The repository reports approximately 8.7 MB memory use, a 0.0% static-image CPU sample and 0.4–0.6% while playing GIFs in one user test. These are observations from one machine and measurement window, not guarantees. No matched benchmark against TRCC or AIDA64 has been performed, so this page does not claim a measured resource advantage over them.</div>
+            <p style="margin-top:12px"><a href="https://www.thermalright.com/support/download/" target="_blank" rel="noopener" style="font-size:9px;font-weight:700;color:#4e6f9c">Thermalright official TRCC download &amp; compatibility list ↗</a> &nbsp; <a href="https://www.aida64.com/products/features/external-display-support" target="_blank" rel="noopener" style="font-size:9px;font-weight:700;color:#4e6f9c">AIDA64 external display support ↗</a></p>
+          </div>
           </div>
         </div>
         <div class="app-note"><strong>Compatibility:</strong> The current implementation targets the Thermalright Burst Assassin 120 Vision (BA120 Vision) profile, USB VID 0416 / PID 5302. It is an independent community project, not an official Thermalright application. Do not assume compatibility with other Thermalright LCD models or revisions without testing.</div>
