@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f5f7">
-<meta name="description" content="Maksoft is a collection of practical browser tools for work, creativity and everyday tasks.">
+<meta name="description" content="Maksoft brings together practical browser tools and focused Windows applications for everyday workflows and PC hardware.">
 <title>Maksoft — Tools that make work flow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/maksoft.css?v=3">
+<link rel="stylesheet" href="assets/maksoft.css?v=4">
 <style id="mk-version-footer-style">
 .mk-version-footer{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:5px auto 17px;padding:0 10px;color:#9aa3b2;font:600 10px/1.35 "DM Sans",Inter,Arial,sans-serif}
 .mk-version-footer-label{margin-right:3px;color:#9aa3b2;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
@@ -18,6 +18,46 @@
 .mk-version-footer a.is-active{background:#263244;border-color:#263244;color:#fff!important;box-shadow:0 2px 6px rgba(25,35,52,.12)}
 .mk-version-footer a:focus-visible{outline:2px solid #6da4ed;outline-offset:2px}
 @media(max-width:600px){.mk-version-footer{margin-bottom:14px}.mk-version-footer-label{font-size:8px}}
+/* Native application collection */
+.applications-section{background:#f6f7f9;padding:104px max(34px,calc((100vw - 1212px)/2)) 100px}
+.applications-section .section-top{max-width:1212px;margin:0 auto 32px}
+.applications-section .section-top p{max-width:520px;color:#737780;font-size:13px;line-height:1.8;margin:12px 0 0}
+.app-slide{max-width:1212px;margin:0 auto;background:#fff;border:1px solid #e8e9ed;border-radius:25px;overflow:hidden;box-shadow:0 24px 70px rgba(25,34,54,.07)}
+.app-slide-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 28px;border-bottom:1px solid #eceef1}
+.app-slide-brand{display:flex;align-items:center;gap:13px}
+.app-slide-icon{width:45px;height:45px;display:grid;place-items:center;border-radius:13px;background:#edf2f8;color:#33465e;font-size:22px}
+.app-slide-brand small{display:block;color:#8a9099;font-size:8px;font-weight:800;letter-spacing:1.6px;margin-bottom:4px}
+.app-slide-brand strong{font:800 17px var(--display);letter-spacing:-.5px}
+.app-version{padding:7px 11px;border:1px solid #e5e8ed;border-radius:999px;color:#667085;font-size:9px;font-weight:800;letter-spacing:.5px}
+.app-slide-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:34px;padding:30px}
+.app-shot-wrap{min-width:0}
+.app-shot{display:block;width:100%;height:auto;border:1px solid #dfe2e8;border-radius:12px;background:#090b15;box-shadow:0 16px 42px rgba(16,23,36,.12)}
+.app-shot-caption{display:flex;justify-content:space-between;gap:12px;margin-top:10px;color:#9298a2;font-size:9px}
+.app-copy{display:flex;flex-direction:column;justify-content:center}
+.app-kicker{font-size:9px;font-weight:800;letter-spacing:1.6px;color:#8b929d;margin-bottom:13px}
+.app-copy h3{font:800 clamp(27px,3vw,39px)/1.12 var(--display);letter-spacing:-1.8px;margin:0 0 15px}
+.app-copy>p{font-size:12px;line-height:1.85;color:#6e737d;margin:0 0 20px}
+.app-actions{display:flex;flex-wrap:wrap;gap:9px;margin:2px 0 22px}
+.app-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;border-radius:999px;background:#171719;color:#fff;font-size:10px;font-weight:800;transition:.2s}
+.app-button:hover{transform:translateY(-2px);box-shadow:0 8px 20px #17171920}
+.app-button.secondary{background:#f2f3f5;color:#252832}
+.app-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.app-point{padding:12px;border:1px solid #eceef1;border-radius:12px}
+.app-point strong{display:block;font:800 19px var(--display);letter-spacing:-.6px;color:#222832}
+.app-point span{display:block;margin-top:4px;color:#858b95;font-size:8px;line-height:1.5}
+.app-detail{padding:0 30px 30px}
+.app-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-top:22px;border-top:1px solid #eceef1}
+.app-detail h4{font:800 12px var(--display);margin:0 0 10px}
+.app-detail p,.app-detail li{font-size:10px;line-height:1.8;color:#777e88}
+.app-detail ul{margin:0;padding-left:16px}
+.app-comparison{width:100%;border-collapse:collapse;margin-top:12px;font-size:9px}
+.app-comparison th,.app-comparison td{text-align:left;padding:10px 9px;border-bottom:1px solid #eceef1;vertical-align:top}
+.app-comparison th{color:#707782;font-weight:800;background:#fafbfc}
+.app-comparison td{color:#6e747d;line-height:1.6}
+.app-comparison td:first-child{font-weight:700;color:#343a44;width:24%}
+.app-note{padding:12px 14px;border-radius:10px;background:#f6f8fb;color:#737b87;font-size:9px;line-height:1.7;margin-top:14px}
+@media(max-width:850px){.app-slide-body{grid-template-columns:1fr;gap:24px}.app-copy{max-width:680px}.app-shot-wrap{max-width:100%}}
+@media(max-width:650px){.applications-section{padding:70px 16px}.app-slide-head{padding:18px}.app-slide-body{padding:18px}.app-detail{padding:0 18px 20px}.app-detail-grid{grid-template-columns:1fr;gap:18px}.app-slide-brand strong{font-size:14px}.app-version{font-size:8px}.app-shot-caption{font-size:8px}.app-comparison{min-width:520px}.app-detail{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -25,7 +65,7 @@
   <div class="nav-wrap">
     <a class="brand" href="#" aria-label="Maksoft home"><span class="brand-mark">m</span><span>maksoft</span></a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#tools">Explore tools</a><a href="#categories">Collections</a><a href="#about">About</a>
+      <a href="#tools">HTML tools</a><a href="#applications">Applications</a><a href="#about">About</a>
     </nav>
     <div class="nav-actions"><a class="nav-cta" href="#tools">Open workspace <span>↗</span></a><button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button></div>
   </div>
@@ -35,9 +75,9 @@
     <div class="hero-copy">
       <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL TOOLKIT</div>
       <h1>Less busywork.<br><span>More brilliant work.</span></h1>
-      <p class="hero-lede">A thoughtfully built collection of simple, powerful tools for the work you do every day. All in one place. Ready when you are.</p>
-      <div class="hero-actions"><a class="button button-dark" href="#tools">Explore all tools <span>→</span></a><a class="text-link" href="#about">Get to know Maksoft <span>↗</span></a></div>
-      <div class="hero-proof"><div class="proof-avatars"><i>M</i><i>+</i><i>✦</i></div><span><strong>One workspace.</strong> A growing set of useful tools.</span></div>
+      <p class="hero-lede">A thoughtfully built collection of simple, powerful tools and focused desktop applications for the work you do every day. All in one place. Ready when you are.</p>
+      <div class="hero-actions"><a class="button button-dark" href="#tools">Explore HTML tools <span>→</span></a><a class="text-link" href="#applications">Discover applications <span>↗</span></a></div>
+      <div class="hero-proof"><div class="proof-avatars"><i>M</i><i>+</i><i>✦</i></div><span><strong>One workspace.</strong> Browser tools and Windows apps.</span></div>
     </div>
     <div class="hero-art" aria-label="Abstract Maksoft visual">
       <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-glow"></div>
@@ -50,8 +90,8 @@
 
   <section class="intro-band" id="about">
     <div class="intro-kicker">A BETTER WAY TO GET THINGS DONE</div>
-    <div class="intro-row"><h2>Small tools.<br><em>Big difference.</em></h2><p>From product operations to creative work, Maksoft brings your everyday workflows into a clean, focused space. No clutter. No complicated setup. Just useful things that work.</p></div>
-    <div class="stat-row"><div><strong>12</strong><span>TOOLS AVAILABLE</span></div><div><strong>04</strong><span>TOOL COLLECTIONS</span></div><div><strong>∞</strong><span>WAYS TO WORK SMARTER</span></div></div>
+    <div class="intro-row"><h2>Small tools.<br><em>Big difference.</em></h2><p>From product operations to creative workflows and PC utilities, Maksoft brings useful browser tools and focused Windows applications into one clean, easy-to-explore home.</p></div>
+    <div class="stat-row"><div><strong>12+</strong><span>BROWSER TOOLS</span></div><div><strong>01</strong><span>DESKTOP APPLICATION</span></div><div><strong>∞</strong><span>WAYS TO WORK SMARTER</span></div></div>
   </section>
 
   <section class="featured-section">
@@ -71,7 +111,7 @@
   </section>
 
   <section class="tools-section" id="tools">
-    <div class="section-top tools-heading"><div><div class="section-kicker">THE MAKSOFT TOOLBOX</div><h2>Find your next favourite.</h2><p>Practical tools, neatly organised. Pick one and get straight to work.</p></div><div class="tool-count"><strong id="visibleCount">12</strong><span>TOOLS</span></div></div>
+    <div class="section-top tools-heading"><div><div class="section-kicker">BROWSER-BASED COLLECTION</div><h2>HTML tools for everyday work.</h2><p>Open a tool in your browser. No desktop installer required for this collection.</p></div><div class="tool-count"><strong id="visibleCount">12</strong><span>TOOLS</span></div></div>
     <div class="tool-controls"><label class="search-box"><span>⌕</span><input id="toolSearch" type="search" placeholder="Search tools..." autocomplete="off"><kbd>⌘ K</kbd></label><div class="filter-row" id="filterRow"><button class="filter-chip active" data-filter="all">All tools</button><button class="filter-chip" data-filter="Operations">Operations</button><button class="filter-chip" data-filter="Content">Content</button><button class="filter-chip" data-filter="Creative">Creative</button><button class="filter-chip" data-filter="Utilities">Utilities</button><button class="filter-chip" data-filter="Favorites">★ Favorites</button></div></div>
     <div class="recent-tools" id="recentTools" hidden><div class="recent-heading">RECENTLY OPENED</div><div class="recent-list" id="recentList"></div></div>
     <div class="tool-grid" id="toolGrid">
@@ -91,13 +131,79 @@
     <div class="no-results" id="noResults" hidden><div>⌕</div><h3>No tools found</h3><p>Try another search or choose a different collection.</p></div>
   </section>
 
+  <section class="applications-section" id="applications">
+    <div class="section-top">
+      <div><div class="section-kicker">WINDOWS DESKTOP SOFTWARE</div><h2>Applications, built with purpose.</h2><p>Standalone Windows projects live in their own repositories. Each application gets its own showcase slide, feature summary, screenshot and download/source links — separate from the browser tools above.</p></div>
+      <div class="tool-count"><strong>01</strong><span>APPLICATION</span></div>
+    </div>
+
+    <article class="app-slide" aria-labelledby="thermalright-title">
+      <div class="app-slide-head">
+        <div class="app-slide-brand"><span class="app-slide-icon" aria-hidden="true">▣</span><div><small>APPLICATION 01 · HARDWARE UTILITY</small><strong id="thermalright-title">Thermalright Mini Display</strong></div></div>
+        <span class="app-version">NATIVE C++ · v3.0.8</span>
+      </div>
+      <div class="app-slide-body">
+        <div class="app-shot-wrap">
+          <img class="app-shot" src="assets/thermalright-mini-display.png" alt="Thermalright Mini Display v3.0.8 showing BA120 Vision device detection, GIF and image selection, scaling, rotation and LCD preview">
+          <div class="app-shot-caption"><span>REAL APPLICATION SCREENSHOT</span><span>BA120 Vision · 240 × 320 panel</span></div>
+        </div>
+        <div class="app-copy">
+          <div class="app-kicker">A LIGHTWEIGHT COMPANION FOR YOUR COOLER LCD</div>
+          <h3>Your cooler screen.<br>Make it yours.</h3>
+          <p>A focused native Windows utility for the Thermalright Burst Assassin 120 Vision USB LCD. Choose a favourite image or animated GIF, adjust its fit and orientation, preview it, then send it directly to the cooler over USB HID.</p>
+          <div class="app-actions">
+            <a class="app-button" href="https://github.com/Magi619/Thermalright-Mini-Display/releases" target="_blank" rel="noopener">Download for Windows <span>↗</span></a>
+            <a class="app-button secondary" href="https://github.com/Magi619/Thermalright-Mini-Display" target="_blank" rel="noopener">View source on GitHub <span>↗</span></a>
+          </div>
+          <div class="app-points">
+            <div class="app-point"><strong>~8.7 MB</strong><span>RAM observed in one Task Manager test</span></div>
+            <div class="app-point"><strong>0.0%</strong><span>Static-image CPU sample observed on one test PC</span></div>
+            <div class="app-point"><strong>0.4–0.6%</strong><span>GIF CPU sample observed during playback</span></div>
+            <div class="app-point"><strong>Native C++</strong><span>Win32 app; no .NET runtime dependency</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="app-detail">
+        <div class="app-detail-grid">
+          <div>
+            <h4>Why was it created?</h4>
+            <p>Many cooler-control suites bundle a broad set of monitoring and tuning features. This project takes a narrower approach: it exists to put the image or animation you choose on the BA120 Vision LCD, without running an unrelated monitoring dashboard, overlays, fan curves or a large control centre. A small, single-purpose program can be easier to launch, understand and leave running in the background.</p>
+            <h4 style="margin-top:18px">What you can do</h4>
+            <ul>
+              <li>Load a still image or animated GIF.</li>
+              <li>Preview the logical 320 × 240 canvas before sending it.</li>
+              <li>Choose image scaling such as Fill / crop and adjust rotation.</li>
+              <li>Set a maximum GIF frame rate.</li>
+              <li>Connect, refresh and disconnect the detected BA120 Vision HID device.</li>
+              <li>Minimise to the system tray and optionally start with Windows.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>How it compares with broader cooler software</h4>
+            <table class="app-comparison">
+              <thead><tr><th>Area</th><th>Thermalright Mini Display</th><th>Typical all-in-one cooler suite</th></tr></thead>
+              <tbody>
+                <tr><td>Main purpose</td><td>Images and GIFs on the supported cooler LCD</td><td>Often combines display controls with monitoring and tuning</td></tr>
+                <tr><td>CPU / RAM / GPU stats</td><td>Not included — deliberately focused</td><td>May include monitoring panels, depending on the product</td></tr>
+                <tr><td>Fan curves / RGB</td><td>Not included</td><td>May be included when supported by the hardware</td></tr>
+                <tr><td>Image control</td><td>Still image, GIF, scaling, rotation and frame-rate cap</td><td>Varies by vendor and device</td></tr>
+                <tr><td>Runtime approach</td><td>Native C++ / Win32; no .NET runtime dependency</td><td>Varies; some suites install background services and extra modules</td></tr>
+              </tbody>
+            </table>
+            <div class="app-note"><strong>Performance note:</strong> The repository reports approximately 8.7 MB memory use, a 0.0% static-image CPU sample and 0.4–0.6% while playing GIFs in one user test. These are observations from one machine and measurement window, not guaranteed results. GIF playback and periodic static-image keep-alive transfers still require work.</div>
+          </div>
+        </div>
+        <div class="app-note"><strong>Compatibility:</strong> The current implementation targets the Thermalright Burst Assassin 120 Vision (BA120 Vision) profile, USB VID 0416 / PID 5302. It is an independent community project, not an official Thermalright application. Do not assume compatibility with other Thermalright LCD models or revisions without testing.</div>
+      </div>
+    </article>
+  </section>
+
   <section class="closing">
-    <div class="closing-glow"></div><div class="closing-content"><div class="section-kicker">THE WORKSPACE IS YOURS</div><h2>Good tools make<br>good work <em>flow.</em></h2><p>Choose a tool, make something useful, and get on with your day.</p><a class="button button-light" href="#tools">Find a tool <span>→</span></a></div><div class="closing-mark">m</div>
+    <div class="closing-glow"></div><div class="closing-content"><div class="section-kicker">THE WORKSPACE IS YOURS</div><h2>Good tools make<br>good work <em>flow.</em></h2><p>Choose a browser tool or explore a desktop application built for a specific job.</p><a class="button button-light" href="#tools">Find a tool <span>→</span></a></div><div class="closing-mark">m</div>
   </section>
 </main>
-<footer class="site-footer"><a class="brand footer-brand" href="#"><span class="brand-mark">m</span><span>maksoft</span></a><span>Thoughtfully made tools for everyday work.</span><span>© <span id="year"></span> Maksoft · Created by Mahendran</span></footer>
+<footer class="site-footer"><a class="brand footer-brand" href="#"><span class="brand-mark">m</span><span>maksoft</span></a><span>Thoughtfully made tools and applications for everyday work.</span><span>© <span id="year"></span> Maksoft · Created by Mahendran</span></footer>
 <nav class="mk-version-footer" aria-label="Choose dashboard version"><span class="mk-version-footer-label">Dashboard</span><a href="https://magi619.github.io/uknowwhoim/">Legacy</a><a href="index.html" class="is-active" aria-current="page">Enhanced</a></nav>
-
 <script src="assets/maksoft.js"></script>
 </body>
 </html>
