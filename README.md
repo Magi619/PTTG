@@ -57,6 +57,18 @@ Excel Tools is reserved for a future collection.
     └── monthly_ahd/
 ```
 
+
+## Desktop applications
+
+Native desktop software is showcased separately from the browser-based tools on the Maksoft home page:
+
+- **Thermalright Mini Display v3.0.8** — a native C++ / Win32 Windows utility for selecting, previewing and sending still images or animated GIFs to the supported Thermalright Burst Assassin 120 Vision (BA120 Vision) USB LCD. The page includes a product screenshot, project purpose, key capabilities, measured performance observations and a comparison with broader all-in-one cooler suites.
+- Source and Windows release downloads: https://github.com/Magi619/Thermalright-Mini-Display
+
+Application showcase section: https://magi619.github.io/PTTG/#applications
+
+The application is hardware-specific and is not an official Thermalright utility. Performance figures shown on the page are observations from one test machine, not guarantees. The native app does not provide CPU, RAM, GPU or fan monitoring; its purpose is intentionally limited to LCD media playback.
+
 ## Run locally
 
 Open `index.html` in a modern browser. The tools are standalone pages in the `tools/` directory and share a common Maksoft navigation bar and visual baseline.
